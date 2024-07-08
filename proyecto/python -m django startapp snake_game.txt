@@ -1,0 +1,3 @@
+python -m django startapp snake_project
+django-admin startproject snake_project
+django-admin --version
