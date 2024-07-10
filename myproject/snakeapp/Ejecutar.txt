@@ -1,0 +1,11 @@
+VsCode:
+
+En la ruta: 
+C:\Users\jpons\Code\Ejercicios\Django\myproject\snakeapp\
+
+Ejecutar:
+python manage.py runserver 
+
+Navegador:
+
+http://127.0.0.1:8000/snake/

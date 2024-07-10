@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'members',
+    'snake',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    "C:/Users/jpons/Code/Ejercicios/Django/myproject/snakeapp/static",
+    "C:/Users/jpons/Code/Ejercicios/Django/myproject/snakeapp/snake/static/",
 ]
 
 # Default primary key field type

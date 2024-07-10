@@ -14,7 +14,7 @@ let dy = 0;
 let manzana = {x: Math.floor(Math.random() * 20) * cuadrado, y: Math.floor(Math.random() * 20) * cuadrado};
 let juego;
 let puntos = 0;
-ctx.fillStyle = "rgba(125,255,90,0.9)";
+ctx.fillStyle = "rgba(125,255,90,1.0)";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 let selectorVeloz = document.getElementById('veloz');
 
@@ -70,11 +70,8 @@ function dibujo() {
   // Borra todo el area del cuadrado
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Background fondo verde
-  let imagen = new Image();
-  imagen.src = "fondo_verde.jpg";
-  let patron = ctx.createPattern(imagen, "no-repeat");
-  ctx.fillStyle = patron;
+  // Fondo verde  
+  ctx.fillStyle = "rgba(125,255,90,1.0)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Cuadrado manzana

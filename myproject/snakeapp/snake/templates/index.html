@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snake</title>
-  <link rel="icon" type="image/x-icon" href="snake_ico.jpg">
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
-  <script src="snake.js"></script>
+  <script src="{% static 'snake.js' %}"></script>
 </head>
 <body>
   <header>
-    <img src="{% static sanke_t.png' %}">
+    <img src="{% static 'sanke_t.png' %}">
   </header>
    <div>
       <label for="select" style="background-color: white"><strong>Dificultad Inicio: </strong></label>
