@@ -7,6 +7,23 @@
 </head>
 <body>
   <h1>Members</h1>
-  <p>members</p>
+
+  {% comment %} Estos comentarios no llegan al HTML final {% endcomment %}
+  {% comment %} Bucle for para presentar los datos de queryset Member: {% endcomment %}
+
+  <!-- Este comentario si llega al HTML -->
+  <ul>
+  {% for member in members %}
+    <li>
+      {{ member.id }} - {{ member.firstname }}, {{ member.lastname }}
+    </li>
+  {% endfor %}
+  </ul>
+  
+  <hr>
+  
+  <p>
+    <a href="/">Volver a inicio</a>
+  </p>
 </body>
 </html>
