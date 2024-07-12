@@ -5,5 +5,6 @@ from . import views         # importación desde la carpeta actual
 
 urlpatterns = [
   # path("", <view_aqui>, name="<nombre (opcional)>"),
+  path('', views.index, name='index'),
   path('members/', views.members, name='members'),
 ]
