@@ -5,3 +5,6 @@ http://127.0.0.1:8000/members/
 http://127.0.0.1:8000/admin/
 jp
 jp
+
+http://127.0.0.1:8000/testing/
+
