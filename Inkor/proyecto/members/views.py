@@ -14,3 +14,20 @@ def members(request):
   }
   # Devolvemos el HTML de templates/members/index.html:
   return render(request, "members/index.html", context=context)
+
+
+def members_detail(request, id):
+  
+  # debug:
+  print("Se ha pedido el id:", id)
+  
+  # Sacamos de la lista de members el del id que me piden:
+  member = Member.objects.all().filter(id=id).first() # deberíamos tener solo un resultado
+  
+  # debug:
+  print(member)
+  
+  context = {
+    "member": member,
+  }
+  return render(request, "members/detail.html", context=context)

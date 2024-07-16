@@ -7,4 +7,6 @@ urlpatterns = [
   # path("", <view_aqui>, name="<nombre (opcional)>"),
   path('', views.index, name='index'),
   path('members/', views.members, name='members'),
+  # path que recibe un entero (int) para mostrar un member de la lista por id:
+  path('members/<int:id>', views.members_detail, name='members-detail'),
 ]

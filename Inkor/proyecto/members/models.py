@@ -8,4 +8,5 @@ class Member(models.Model):
   phone     = models.CharField(max_length=15, blank=True, null=True)
 
   def __str__(self) -> str:
-    return f"{self.id} - {self.firstname}, {self.lastname}"
+    # representación en string del objeto Member:
+    return f"{self.id}: {self.firstname}, {self.lastname}"
