@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <script src="{% static 'snake.js' %}"></script>
+</head>
+<body>
+  <header>
+    <img src="{% static 'sanke_t.png' %}">
+  </header>
+   <div>
+      <label for="select" style="background-color: white"><strong>Dificultad Inicio: </strong></label>
+      <select id="veloz">
+        <option disabled selected value="0">Elige Nivel</option>
+        <option value="200">Facil</option>
+        <option value="150">Medio</option>
+        <option value="100">Difícil</option>
+        <option value="50">Muy Difícil</option>
+      </select>
+   </div>
+  <section>
+       <canvas id="juegoSerpiente" width="400" height="400"></canvas>
+  </section>
+       <button id="botonStart"><strong>Empezar Juego</strong></button>
+       <script>
+        window.onload = function() {
+            initSnakeGame();
+        };
+    </script>
+  <footer><p id="output"></p></footer>
+</body>
+</html>
