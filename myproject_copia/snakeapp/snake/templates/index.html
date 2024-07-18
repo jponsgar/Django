@@ -8,6 +8,37 @@
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
   <script src="{% static 'snake.js' %}"></script>
+  <script>
+    window.onload = function() {
+        const playerName = prompt("Ingrese su nombre:");
+        initSnakeGame(playerName);
+
+        // Configura el token CSRF para futuras peticiones
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        setUpCsrf(csrftoken);
+    };
+
+    function setUpCsrf(csrfToken) {
+        const csrfSafeMethod = (method) => /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
+        const sameOrigin = (url) => {
+            const host = document.location.host; // includes port
+            const protocol = document.location.protocol;
+            const sr_origin = '//' + host;
+            const origin = protocol + sr_origin;
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                   (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                   !(/^(\/\/|http:|https:).*/.test(url));
+        };
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrfToken);
+                }
+            }
+        });
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -27,12 +58,7 @@
        <canvas id="juegoSerpiente" width="400" height="400"></canvas>
   </section>
        <button id="botonStart"><strong>Empezar Juego</strong></button>
-       <script>
-        window.onload = function() {
-            const playerName = prompt("Ingrese su nombre:");
-            initSnakeGame(playerName);
-        };
-    </script>
+       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   <footer><p id="output"></p></footer>
 </body>
 </html>

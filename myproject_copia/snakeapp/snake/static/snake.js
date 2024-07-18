@@ -93,9 +93,7 @@ function initSnakeGame(playerName) {
       });
 
       // Agrega una coordenada al array serpiente
-      const cabeza = {x: serpiente[0].x + dx, y: serpiente[0].y + dy
-
-};
+      const cabeza = {x: serpiente[0].x + dx, y: serpiente[0].y + dy};
       serpiente.unshift(cabeza);
 
       // Comprueba si la serpiente come manzana sino elimina última coordenada del array y la devuelve
@@ -115,7 +113,8 @@ function initSnakeGame(playerName) {
       // Comprueba si la serpiente colisiona con el limite o ella misma, entonces finaliza juego
       if (cabeza.x < 0 || cabeza.x >= canvas.width || cabeza.y < 0 || cabeza.y >= canvas.height || colision()) {
         clearInterval(juego);
-        alert(`Fin del Juego!!! ${playerName} tu puntuación fue de ${puntos}`);
+        alert(`Fin del Juego!!! ${playerName} tu puntuación es de ${puntos} manzanas`);
+        saveScore(playerName, puntos);
         window.location.href = "/snakes/";
       }
     }
@@ -144,5 +143,20 @@ function initSnakeGame(playerName) {
     // aplica la función (segment => segment.x === serpiente[0].x && segment.y === serpiente[0].y) a cada segmento
     function colision() {
       return serpiente.slice(1).some(segment => segment.x === serpiente[0].x && segment.y === serpiente[0].y);
+    }
+
+    function saveScore(playerName, puntos) {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      fetch('/save_score/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': csrfToken
+        },
+        body: `playerName=${playerName}&puntos=${puntos}`
+      })
+      .then(response => response.json())
+      .then(data => console.log('Success:', data))
+      .catch(error => console.error('Error:', error));
     }
 }
