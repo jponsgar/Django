@@ -95,7 +95,7 @@ urlpatterns = [
     path('protected/', protected_view, name='protected'),
 ]
 
-### Paso 6: Crear plantillas, en `myapp/templates`:
+### Paso 6: Crear htmls, en `myapp/templates`:
 
 #### `signup.html`
 

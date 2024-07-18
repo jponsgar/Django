@@ -76,9 +76,9 @@ urlpatterns = [
     path('<int:pk>/borrar/', ProductoDeleteView.as_view(), name='producto_delete'),
 ]
 
-### 5. Crear htmls en template:
+### 5. Crear htmls, en `myapp/templates`:
 
-#### Producto List (`producto_list.html`)
+#### `producto_list.html`
 
 <!DOCTYPE html>
 <html>
@@ -100,7 +100,7 @@ urlpatterns = [
 </body>
 </html>
 
-#### Producto Detail (`producto_detail.html`)
+#### `producto_detail.html`
 
 <!DOCTYPE html>
 <html>
@@ -117,7 +117,7 @@ urlpatterns = [
 </body>
 </html>
 
-#### Producto Form (`producto_form.html`)
+#### `producto_form.html`
 
 <!DOCTYPE html>
 <html>
@@ -136,7 +136,7 @@ urlpatterns = [
 </html>
 
 
-#### Producto Delete Confirmation (`producto_confirm_delete.html`)
+#### `producto_confirm_delete.html`
 
 <!-- myapp/templates/producto_confirm_delete.html -->
 <!DOCTYPE html>
