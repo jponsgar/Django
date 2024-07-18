@@ -1,4 +1,4 @@
-function initSnakeGame(playerName) {
+function initSnakeGame(nombre) {
     // Definicion variables
     const canvas = document.getElementById('juegoSerpiente');
     const ctx = canvas.getContext('2d');
@@ -113,8 +113,8 @@ function initSnakeGame(playerName) {
       // Comprueba si la serpiente colisiona con el limite o ella misma, entonces finaliza juego
       if (cabeza.x < 0 || cabeza.x >= canvas.width || cabeza.y < 0 || cabeza.y >= canvas.height || colision()) {
         clearInterval(juego);
-        alert(`Fin del Juego!!! ${playerName} tu puntuación es de ${puntos} manzanas`);
-        saveScore(playerName, puntos);
+        alert(`Fin del Juego!!! ${nombre} tu puntuación es de ${puntos} manzanas`);
+        saveScore(nombre, puntos);
         window.location.href = "/snakes/";
       }
     }
@@ -145,7 +145,7 @@ function initSnakeGame(playerName) {
       return serpiente.slice(1).some(segment => segment.x === serpiente[0].x && segment.y === serpiente[0].y);
     }
 
-    function saveScore(playerName, puntos) {
+    function saveScore(nombre, puntos) {
       const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
       fetch('/save_score/', {
         method: 'POST',
@@ -153,7 +153,7 @@ function initSnakeGame(playerName) {
           'Content-Type': 'application/x-www-form-urlencoded',
           'X-CSRFToken': csrfToken
         },
-        body: `playerName=${playerName}&puntos=${puntos}`
+        body: `nombre=${nombre}&puntos=${puntos}`
       })
       .then(response => response.json())
       .then(data => console.log('Success:', data))

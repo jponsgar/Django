@@ -10,8 +10,8 @@
   <script src="{% static 'snake.js' %}"></script>
   <script>
     window.onload = function() {
-        const playerName = prompt("Ingrese su nombre:");
-        initSnakeGame(playerName);
+        const nombre = prompt("Ingrese su nombre:");
+        initSnakeGame(nombre);
 
         // Configura el token CSRF para futuras peticiones
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;

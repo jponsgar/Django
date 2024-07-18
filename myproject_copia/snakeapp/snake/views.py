@@ -14,9 +14,9 @@ def snakes(request):
 @csrf_exempt
 def save_score(request):
     if request.method == 'POST':
-        player_name = request.POST.get('playerName')
+        player_name = request.POST.get('nombre')
         puntos = request.POST.get('puntos')
-        snake = Snake(nombre=player_name, puntos=int(puntos))
+        snake = Snake(nombre=nombre, puntos=int(puntos))
         snake.save()
         return JsonResponse({'status': 'success'})
         return JsonResponse({'status': 'fail'})
