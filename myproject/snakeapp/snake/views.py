@@ -6,13 +6,10 @@ from .models import Snake
 def index(request):
     return render(request, 'index.html')
 
+@csrf_exempt
 def snakes(request):
     snakes_list = Snake.objects.all()
     return render(request, 'snakes.html', {'snakes': snakes_list})
-
-
-@csrf_exempt
-def save_score(request):
     if request.method == 'POST':
         player_name = request.POST.get('nombre')
         puntos = request.POST.get('puntos')

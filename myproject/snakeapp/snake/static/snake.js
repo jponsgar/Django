@@ -147,7 +147,7 @@ function initSnakeGame(nombre) {
 
     function saveSnake(nombre, puntos) {
       const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      fetch('/save_score/', {
+      fetch('/snakes/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
