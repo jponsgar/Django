@@ -1,4 +1,6 @@
+"""
 Crear un sistema de autenticación que permita a los usuarios registrarse, iniciar sesión y acceder a una página protegida. Utilizar el sistema de autenticación integrado de Django (django.contrib.auth). Crear vistas para registro (SignupView), inicio de sesión (LoginView) y cierre de sesión (LogoutView). Usar decoradores como @login_required para proteger las vistas. Configurar las URLs correspondientes en urls.py.
+"""
 
 ### Paso 1: Configurar el proyecto y la aplicación
 
@@ -93,10 +95,9 @@ urlpatterns = [
     path('protected/', protected_view, name='protected'),
 ]
 
-
 ### Paso 6: Crear plantillas, en `myapp/templates`:
 
-- `signup.html`
+#### `signup.html`
 
 <!DOCTYPE html>
 <html>
@@ -113,8 +114,7 @@ urlpatterns = [
 </body>
 </html>
 
-
-- `login.html`
+#### `login.html`
 
 <!DOCTYPE html>
 <html>
@@ -131,8 +131,7 @@ urlpatterns = [
 </body>
 </html>
 
-
-- `protected.html`
+#### `protected.html`
 
 <!DOCTYPE html>
 <html>
@@ -146,8 +145,7 @@ urlpatterns = [
 </body>
 </html>
 
-
-- `logged_out.html`
+#### `logged_out.html`
 
 <!DOCTYPE html>
 <html>
@@ -160,22 +158,15 @@ urlpatterns = [
 </body>
 </html>
 
-
 ### Paso 7: Migrar la base de datos y ejecutar el servidor:
 
 python manage.py migrate
-python manage.py runserver
 
+python manage.py runserver
 
 ### Paso 8: Prueba
 
-Accede a las rutas:
+Acceder a las rutas:
+
 http://127.0.0.1:8000/signup/
 http://127.0.0.1:8000/login/
-http://127.0.0.1:8000/logout/
-http://127.0.0.1:8000/protected/
-
-Usuario:cs
-correo:cs@correo.com
-Psw:Password1.
-

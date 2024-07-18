@@ -1,4 +1,6 @@
+"""
 Implementar un CRUD (Create, Read, Update, Delete) básico para un modelo, por ejemplo, un modelo Producto. Definir el modelo Producto en models.py con campos como nombre, descripción y precio. Usar vistas basadas en clases (Class-Based Views) como ListView, DetailView, CreateView, UpdateView y DeleteView.  Crear formularios con ModelForm. Configurar las rutas y plantillas necesarias.
+"""
 
 ### 1. Definir el modelo `Producto` en `models.py`:
 
@@ -98,7 +100,6 @@ urlpatterns = [
 </body>
 </html>
 
-
 #### Producto Detail (`producto_detail.html`)
 
 <!DOCTYPE html>
@@ -154,9 +155,8 @@ urlpatterns = [
 </body>
 </html>
 
-### 6. Configurar las URLs del proyecto, en project/:
+### 6. Configurar las URLs del proyecto, en project/urls.py:
 
-# project/urls.py
 from django.contrib import admin
 from django.urls import path, include
 
@@ -175,5 +175,7 @@ python manage.py migrate
 python manage.py runserver
 
 ### 9. Prueba:
+
+Acceder a la ruta:
 
 http://127.0.0.1:8000/productos/
