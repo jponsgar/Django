@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Index</title>
+    <title>Página Principal</title>
 </head>
 <body>
-  <h1>Index</h1>
-  <p>
-  <a href="{% url 'producto_form' %}">producto_form</a>
-  </p>
-  <p>
-  <a href="{% url 'producto_list' %}">producto_list</a>
-  </p>
+    <h1>Bienvenido a la Página Principal de Productos</h1>
+    <a href="{% url 'producto_list' %}">Ver Productos</a>
 </body>
 </html>

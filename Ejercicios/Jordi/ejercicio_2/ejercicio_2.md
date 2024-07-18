@@ -30,6 +30,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Producto
 from .forms import ProductoForm
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
 
 class ProductoListView(ListView):
     model = Producto
@@ -78,6 +82,21 @@ urlpatterns = [
 
 ### 5. Crear htmls, en `myapp/templates`:
 
+#### `index.html`
+
+```html
+<!-- myapp/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Principal</title>
+</head>
+<body>
+    <h1>Bienvenido a la Página Principal</h1>
+    <a href="{% url 'producto_list' %}">Ver Productos</a>
+</body>
+</html>
+
 #### `producto_list.html`
 
 <!DOCTYPE html>
@@ -97,6 +116,8 @@ urlpatterns = [
             </li>
         {% endfor %}
     </ul>
+    <br>
+    <a href="{% url 'index' %}">Volver a la página de inicio</a>
 </body>
 </html>
 
@@ -159,10 +180,12 @@ urlpatterns = [
 
 from django.contrib import admin
 from django.urls import path, include
+from myapp.views import index  # Importar la vista index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', include('myapp.urls')),
+    path('', index, name='index'),  # Configurar la URL principal
 ]
 
 ### 7. Migrar los cambios a la base de datos:
@@ -178,4 +201,4 @@ python manage.py runserver
 
 Acceder a la ruta:
 
-http://127.0.0.1:8000/productos/
+http://127.0.0.1:8000/

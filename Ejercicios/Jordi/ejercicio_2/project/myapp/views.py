@@ -2,6 +2,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Producto
 from .forms import ProductoForm
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
 
 class ProductoListView(ListView):
     model = Producto

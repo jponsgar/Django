@@ -8,7 +8,6 @@ django-admin startproject myproject
 cd myproject
 django-admin startapp myapp
 
-
 ### Paso 2: Configurar el archivo `settings.py`
 
 
@@ -25,9 +24,7 @@ INSTALLED_APPS = [
 LOGIN_REDIRECT_URL = 'protected'  # Redirigir después del login
 LOGOUT_REDIRECT_URL = 'login'     # Redirigir después del logout
 
-
 ### Paso 3: Crear formularios de registro en `myapp/forms.py`:
-
 
 from django import forms
 from django.contrib.auth.models import User
@@ -49,6 +46,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import View
 from .forms import SignUpForm
+
+def index(request):
+    return render(request, 'index.html')
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -80,12 +80,11 @@ class CustomLogoutView(LogoutView):
 def protected_view(request):
     return render(request, 'protected.html')
 
-
 ### Paso 5: Configurar las URLs. En `myproject/urls.py`:
 
 from django.contrib import admin
-from django.urls import path
-from myapp.views import SignUpView, CustomLoginView, CustomLogoutView, protected_view
+from django.urls import path, include
+from myapp.views import SignUpView, CustomLoginView, CustomLogoutView, protected_view, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -93,9 +92,24 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('protected/', protected_view, name='protected'),
+    path('', index, name='index'),
 ]
 
 ### Paso 6: Crear htmls, en `myapp/templates`:
+
+#### `index.html`
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Welcome to the Main User Page</h1>
+    <a href="{% url 'signup' %}">User signup</a>
+    <br><br>
+    <a href="{% url 'login' %}">User login</a>
+</body>
+</html>
 
 #### `signup.html`
 
@@ -111,6 +125,8 @@ urlpatterns = [
         {{ form.as_p }}
         <button type="submit">Sign Up</button>
     </form>
+    <br>
+    <a href="{% url 'index' %}">Main Page</a>
 </body>
 </html>
 
@@ -128,6 +144,8 @@ urlpatterns = [
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
+    <br>
+    <a href="{% url 'index' %}">Main Page</a>
 </body>
 </html>
 
@@ -166,7 +184,6 @@ python manage.py runserver
 
 ### Paso 8: Prueba
 
-Acceder a las rutas:
+Acceder a la ruta:
 
-http://127.0.0.1:8000/signup/
-http://127.0.0.1:8000/login/
+http://127.0.0.1:8000

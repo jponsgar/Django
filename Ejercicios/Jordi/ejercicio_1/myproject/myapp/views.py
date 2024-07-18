@@ -5,6 +5,9 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import View
 from .forms import SignUpForm
 
+def index(request):
+    return render(request, 'index.html')
+
 class SignUpView(View):
     form_class = SignUpForm
     template_name = 'signup.html'

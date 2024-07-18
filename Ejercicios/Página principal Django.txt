@@ -1,0 +1,66 @@
+Página principal en la URL `http://127.0.0.1:8000/`, puedes seguir estos pasos:
+
+### 1. Crear una vista para la página principal
+
+En tu aplicación, crea una vista para la página principal. Si no tienes una aplicación específica para esto, puedes usar una existente o crear una nueva.
+
+#### Crear una vista en `myapp/views.py`
+
+```python
+# myapp/views.py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+```
+
+### 2. Crear una plantilla para la página principal
+
+Crea una plantilla HTML para la página principal.
+
+#### Crear la plantilla `index.html`
+
+```html
+<!-- myapp/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Principal</title>
+</head>
+<body>
+    <h1>Bienvenido a la Página Principal</h1>
+    <a href="{% url 'producto_list' %}">Ver Productos</a>
+</body>
+</html>
+```
+
+### 3. Configurar las URLs para la página principal
+
+En el archivo `urls.py` de tu proyecto, configura la URL principal para que apunte a la nueva vista `index`.
+
+#### Modificar `project/urls.py`
+
+```python
+# project/urls.py
+from django.contrib import admin
+from django.urls import path, include
+from myapp.views import index  # Importar la vista index
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('productos/', include('myapp.urls')),
+    path('', index, name='index'),  # Configurar la URL principal
+]
+```
+
+### 4. Verificar que todo funcione
+
+Asegúrate de que todas las migraciones estén aplicadas y ejecuta el servidor de desarrollo para comprobar que la página principal funciona correctamente.
+
+```sh
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+Ahora, al navegar a `http://127.0.0.1:8000/`, deberías ver tu página principal con un enlace para ver la lista de productos.
