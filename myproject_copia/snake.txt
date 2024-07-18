@@ -1,8 +1,8 @@
 Indicaciones para ejecutar con Django, el programa snake.js en el html index.html. Indicar todos los pasos, Y comandos.
 Al iniciar el juego snake, solicitar nombre del jugador con 'alert',  y al finalizar el juego indicar juego finalizado con 'alert' y añadir url con lista de members.
 
-from members.models import Member 
-member = Member(nombre='', puntos='')
+from snake.models import Snake 
+snake = Snake(nombre='', puntos='')
 
 con la Estructura de Directorios y Archivos:
 

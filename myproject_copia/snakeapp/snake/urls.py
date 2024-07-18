@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import index, save_score
+from . import views
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('save_score/', save_score, name='save_score'),
-    path('top_scores/', top_scores, name='top_scores'),
+    path('', views.index, name='index'),
+    path('snakes/', views.snakes, name='snakes'),
 ]

@@ -29,7 +29,8 @@
        <button id="botonStart"><strong>Empezar Juego</strong></button>
        <script>
         window.onload = function() {
-            initSnakeGame();
+            const playerName = prompt("Ingrese su nombre:");
+            initSnakeGame(playerName);
         };
     </script>
   <footer><p id="output"></p></footer>
