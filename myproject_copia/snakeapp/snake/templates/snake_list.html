@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Puntajes</title>
+</head>
+<body>
+  <h1>Lista de Puntajes</h1>
+  <ul>
+    {% for snake in snakes %}
+    <li>{{ snake.nombre }}: {{ snake.puntos }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'snake_create' %}">Jugar de nuevo</a>
+</body>
+</html>
