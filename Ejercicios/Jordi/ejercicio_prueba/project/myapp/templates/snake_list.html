@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Snakes</title>
+</head>
+<body>
+    <h1>Lista de Snakes</h1>
+    <a href="{% url 'snake_create' %}">Crear Snake</a>
+    <ul>
+        {% for snake in object_list %}
+            <li>
+                <a href="{% url 'snake_detail' snake.pk %}">{{ snake.nombre }}</a> - {{ snake.puntos }}
+                <a href="{% url 'snake_update' snake.pk %}">Editar</a>
+                <a href="{% url 'snake_delete' snake.pk %}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'index' %}">Volver a la página de inicio</a>
+</body>
+</html>
+
+
+
+

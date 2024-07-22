@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eliminar Snake</title>
+</head>
+<body>
+    <h1>Eliminar Snake</h1>
+    <p>¿Estás seguro de que deseas eliminar el snake "{{ object.nombre }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+    </form>
+    <a href="{% url 'snake_list' %}">Cancelar</a>
+</body>
+</html>
+

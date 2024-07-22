@@ -8,10 +8,10 @@ def index(request):
 
 @csrf_exempt
 def snakes(request):
-    snakes_list = Snake.objects.all()
-    return render(request, 'snakes.html', {'snakes': snakes_list})
+    snakes = Snake.objects.all()
+    return render(request, 'snakes.html', {'snakes': snakes})
     if request.method == 'POST':
-        player_name = request.POST.get('nombre')
+        nombre = request.POST.get('nombre')
         puntos = request.POST.get('puntos')
         snake = Snake(nombre=nombre, puntos=int(puntos))
         snake.save()

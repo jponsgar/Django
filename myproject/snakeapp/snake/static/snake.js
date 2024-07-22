@@ -153,7 +153,7 @@ function initSnakeGame(nombre) {
           'Content-Type': 'application/x-www-form-urlencoded',
           'X-CSRFToken': csrfToken
         },
-        body: `nombre=${nombre}&puntos=${puntos}`
+        body: `snake=${nombre}&puntos=${puntos}`
       })
       .then(response => response.json())
       .then(data => console.log('Success:', data))
