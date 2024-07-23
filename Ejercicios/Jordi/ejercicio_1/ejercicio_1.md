@@ -10,7 +10,6 @@ django-admin startapp myapp
 
 ### Paso 2: Configurar el archivo `settings.py`
 
-
 INSTALLED_APPS = [
     ...
     'django.contrib.auth',
@@ -18,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',  # Añade tu aplicación aquí
+    'myapp', 
 ]
 
 LOGIN_REDIRECT_URL = 'protected'  # Redirigir después del login
@@ -36,7 +35,6 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
-
 
 ### Paso 4: Crear vistas de registro, inicio de sesión y cierre de sesión. En `myapp/views.py`:
 

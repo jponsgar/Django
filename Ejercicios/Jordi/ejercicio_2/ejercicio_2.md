@@ -84,8 +84,6 @@ urlpatterns = [
 
 #### `index.html`
 
-```html
-<!-- myapp/templates/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,7 +154,6 @@ urlpatterns = [
 </body>
 </html>
 
-
 #### `producto_confirm_delete.html`
 
 <!-- myapp/templates/producto_confirm_delete.html -->
@@ -180,12 +177,12 @@ urlpatterns = [
 
 from django.contrib import admin
 from django.urls import path, include
-from myapp.views import index  # Importar la vista index
+from myapp.views import index 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', include('myapp.urls')),
-    path('', index, name='index'),  # Configurar la URL principal
+    path('', index, name='index'),  
 ]
 
 ### 7. Migrar los cambios a la base de datos:
