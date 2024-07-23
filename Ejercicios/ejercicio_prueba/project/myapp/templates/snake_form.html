@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <script src="{% static 'snake.js' %}"></script>
 </head>
 <body>
     <header>
-        <img src="{% static 'snake_t.png' %}">
+      <img src="{% static 'sanke_t.png' %}">
     </header>
     <div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if object %}Crear{% endif %}</button>
+    </form>
         <label for="veloz"><strong>Dificultad Inicio: </strong></label>
         <select id="veloz">
             <option disabled selected value="0">Elige Nivel</option>
@@ -25,14 +31,9 @@
     <section>
         <canvas id="juegoSerpiente" width="400" height="400"></canvas>
     </section>
+    <button id="botonStart"><strong>Empezar Juego</strong></button>
+    <!-- <a href="{% url 'snake_list' %}">Volver a la lista</a> -->
     <footer><p id="output"></p></footer>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
-        <button id="botonStart"><strong>Empezar Juego</strong></button>
-    </form>
-    <a href="{% url 'snake_list' %}">Volver a la lista</a>
 </body>
 </html>
 
