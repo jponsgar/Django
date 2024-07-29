@@ -7,7 +7,6 @@
   <title>Snake</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
-  <script src="{% static 'snake.js' %}"></script>
   <script>
     window.onload = function() {
         const nombre = prompt("Introduce tu nombre:");
@@ -59,6 +58,7 @@
   </section>
        <button id="botonStart"><strong>Empezar Juego</strong></button>
        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+       <script src="{% static 'snake.js' %}"></script>
   <footer><p id="output"></p></footer>
 </body>
 </html>

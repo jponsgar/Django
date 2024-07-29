@@ -114,8 +114,8 @@ function initSnakeGame(nombre) {
       if (cabeza.x < 0 || cabeza.x >= canvas.width || cabeza.y < 0 || cabeza.y >= canvas.height || colision()) {
         clearInterval(juego);
         alert(`Fin del Juego!!! ${nombre} tu puntuación es de ${puntos} manzanas`);
-        saveSnake(nombre, puntos);
-        window.location.href = "/snakes/";
+        guardarPuntos();
+      // window.location.href = "/save_score/";
       }
     }
 
@@ -145,18 +145,44 @@ function initSnakeGame(nombre) {
       return serpiente.slice(1).some(segment => segment.x === serpiente[0].x && segment.y === serpiente[0].y);
     }
 
-    function saveSnake(nombre, puntos) {
-      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-      fetch('/snakes/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-CSRFToken': csrfToken
-        },
-        body: `snake=${nombre}&puntos=${puntos}`
-      })
-      .then(response => response.json())
-      .then(data => console.log('Success:', data))
-      .catch(error => console.error('Error:', error));
+function guardarPuntos() {
+  const nombre = nombreInput.value;
+  if (nombre) {
+    fetch('/save_score/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify({nombre: nombre, puntos: puntos})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        alert('Puntuación guardada correctamente.');
+      } else {
+        alert('Error al guardar la puntuación.');
+      }
+    });
+  } else {
+    alert('Por favor, ingrese su nombre.');
+  }
+}
+
+// Obtener el valor de la cookie CSRF
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
     }
+  }
+   return cookieValue;
+}
 }

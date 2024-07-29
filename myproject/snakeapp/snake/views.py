@@ -7,16 +7,15 @@ def index(request):
     return render(request, 'index.html')
 
 @csrf_exempt
-def snakes(request):
-    snakes = Snake.objects.all()
-    return render(request, 'snakes.html', {'snakes': snakes})
+def save_score(request):
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        puntos = request.POST.get('puntos')
-        snake = Snake(nombre=nombre, puntos=int(puntos))
-        snake.save()
+        data = json.loads(request.body)
+        nombre = data.get('nombre')
+        puntos = data.get('puntos')
+        jugador = Snake(nombre=nombre, puntos=puntos)
+        jugador.save()
         return JsonResponse({'status': 'success'})
-        return JsonResponse({'status': 'fail'})
+    return JsonResponse({'status': 'failed'}, status=400)
 
 
 
