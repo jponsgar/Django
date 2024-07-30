@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'snake_t.png' %}" alt="Snake">
+    </header>
+    <div>
+        <label for="nombre"><strong>Nombre del Jugador: </strong></label>
+        <input type="text" id="nombre" name="nombre">
+        <label for="veloz"><strong>Dificultad Inicio: </strong></label>
+        <select id="veloz">
+            <option disabled selected value="0">Elige Nivel</option>
+            <option value="200">Fácil</option>
+            <option value="150">Medio</option>
+            <option value="100">Difícil</option>
+            <option value="50">Muy Difícil</option>
+        </select>
+    </div>
+    <section>
+        <canvas id="juegoSerpiente" width="400" height="400"></canvas>
+    </section>
+    <button id="botonStart"><strong>Empezar Juego</strong></button>
+    <footer><p id="output"></p></footer>
+    <form id="saveScoreForm" method="post" action="{% url 'save_score' %}">
+        {% csrf_token %}
+        <input type="hidden" id="inputNombre" name="nombre">
+        <input type="hidden" id="inputPuntos" name="puntos">
+    </form>
+    <script src="{% static 'snake.js' %}"></script>
+</body>
+</html>

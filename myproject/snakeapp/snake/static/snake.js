@@ -115,7 +115,7 @@ function initSnakeGame(nombre) {
         clearInterval(juego);
         alert(`Fin del Juego!!! ${nombre} tu puntuación es de ${puntos} manzanas`);
         guardarPuntos();
-      // window.location.href = "/save_score/";
+        window.location.href = "/save_score/";
       }
     }
 
