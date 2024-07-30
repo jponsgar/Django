@@ -7,58 +7,33 @@
   <title>Snake</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
-  <script>
-    window.onload = function() {
-        const nombre = prompt("Introduce tu nombre:");
-        initSnakeGame(nombre);
-
-        // Configura el token CSRF para futuras peticiones
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        setUpCsrf(csrftoken);
-    };
-
-    function setUpCsrf(csrfToken) {
-        const csrfSafeMethod = (method) => /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
-        const sameOrigin = (url) => {
-            const host = document.location.host; // includes port
-            const protocol = document.location.protocol;
-            const sr_origin = '//' + host;
-            const origin = protocol + sr_origin;
-            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-                   (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-                   !(/^(\/\/|http:|https:).*/.test(url));
-        };
-
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                    xhr.setRequestHeader("X-CSRFToken", csrfToken);
-                }
-            }
-        });
-    }
-  </script>
 </head>
 <body>
-  <header>
-    <img src="{% static 'sanke_t.png' %}">
-  </header>
-   <div>
-      <label for="select" style="background-color: white"><strong>Dificultad Inicio: </strong></label>
-      <select id="veloz">
-        <option disabled selected value="0">Elige Nivel</option>
-        <option value="200">Facil</option>
-        <option value="150">Medio</option>
-        <option value="100">Difícil</option>
-        <option value="50">Muy Difícil</option>
-      </select>
-   </div>
-  <section>
-       <canvas id="juegoSerpiente" width="400" height="400"></canvas>
-  </section>
-       <button id="botonStart"><strong>Empezar Juego</strong></button>
-       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-       <script src="{% static 'snake.js' %}"></script>
-  <footer><p id="output"></p></footer>
+    <header>
+        <img src="{% static 'sanke_t.png' %}">
+    </header>
+    <div>
+        <label for="nombre"><strong>Nombre del Jugador: </strong></label>
+        <input type="text" id="nombre" name="nombre">
+        <label for="select" style="background-color: white"><strong>Dificultad Inicio: </strong></label>
+        <select id="veloz">
+            <option disabled selected value="0">Elige Nivel</option>
+            <option value="200">Fácil</option>
+            <option value="150">Medio</option>
+            <option value="100">Difícil</option>
+            <option value="50">Muy Difícil</option>
+        </select>
+    </div>
+    <section>
+        <canvas id="juegoSerpiente" width="400" height="400"></canvas>
+    </section>
+    <button id="botonStart"><strong>Empezar Juego</strong></button>
+    <footer><p id="output"></p></footer>
+    <form id="saveScoreForm" method="post" action="{% url 'save_score' %}">
+        {% csrf_token %}
+        <input type="hidden" id="inputNombre" name="nombre">
+        <input type="hidden" id="inputPuntos" name="puntos">
+    </form>
+    <script src="{% static 'snake.js' %}"></script>
 </body>
 </html>

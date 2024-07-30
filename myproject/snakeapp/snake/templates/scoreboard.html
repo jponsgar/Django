@@ -6,12 +6,12 @@
     <title>Scoreboard</title>
 </head>
 <body>
-    <h1>Tabla de Puntuaciones</h1>
-    <table>
+    <h1 style="font-family:Arial, Helvetica, sans-serif;text-align:center;text-decoration: underline;">Tabla de Puntuaciones</h1>
+    <table style="padding: 10px;">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Puntos</th>
+                <th style="font-family:Arial, Helvetica, sans-serif;text-decoration: underline;">Nombre</th>
+                <th style="font-family:Arial, Helvetica, sans-serif;text-decoration: underline;">Puntos</th>
             </tr>
         </thead>
         <tbody>
@@ -23,5 +23,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <br><br>
+    <a href="{% url 'index' %}">Volver al Juego</a>
 </body>
 </html>
