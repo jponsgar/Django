@@ -1,4 +1,4 @@
-- Se ejecuta con Django, el programa snake.js en el html index.html y scoreboard.html para puntuación.
+- Se ejecuta en Django, el programa snake.js en el html index.html y scoreboard.html para puntuación.
 Al iniciar el juego, solicita nombre del jugador,  y al finalizar el juego muestra lista jugadores por puntuación y nombre.
 
 - from snake.models import snake
