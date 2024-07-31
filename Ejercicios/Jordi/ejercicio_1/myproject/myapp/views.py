@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import View
@@ -31,8 +31,15 @@ class SignUpView(View):
 class CustomLoginView(LoginView):
     template_name = 'login.html'
 
-class CustomLogoutView(LogoutView):
+class CustomLogoutView(View):
     template_name = 'logged_out.html'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
 
 @login_required
 def protected_view(request):
