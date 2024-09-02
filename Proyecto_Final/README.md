@@ -1,92 +1,129 @@
-# Proyecto Final del curso
-  - Proyecto final de código
-  - CV y Linkedin
-  - Búsqueda activa de empleo
+"""
+Para la gestión de Productos, se crea una página web usando Django:
+Se implementa con CRUD (Create, Read, Update, Delete), y se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
+Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, CreateView, UpdateView y DeleteView. 
+Se crean formularios con ModelForm.
+"""
 
-### Semana 1: Enfoque en el Proyecto Final
+### 0. Diagrama de la aplicación:
 
-#### Día 1-2: Definición del Proyecto
-1. **Requisitos y objetivos:** Los alumnos deben definir claramente el proyecto que quieren desarrollar. Puede ser una aplicación web utilizando Django que resuelva un problema real o simulado. Deben incluir:
-   - Objetivo del proyecto: ¿qué problema resuelve?, ¿para qué sirve?
-   - Funcionalidades principales: ¿qué puedes hacer con esta web / app?
-   - Público objetivo: ¿quién lo usaría?
 
-2. **Planificación y diseño:** 
-   - Crear un esquema de la arquitectura del proyecto -> Django...
-   - Diseñar las bases de datos necesarias -> SQLite con modelos de Django
-   - Establecer los endpoints de la API (si aplica).
-   - Definir el flujo de la aplicación: diagramas
 
-#### Día 3-5: Desarrollo del Proyecto
-1. **Configuración del entorno:** entorno de desarrollo correctamente configurado con Django, bases de datos y otras herramientas necesarias.
-2. **Desarrollo de funcionalidades principales:** Los estudiantes deben centrarse en desarrollar las funcionalidades clave del proyecto. Recomienda el uso de buenas prácticas de código:
-   - Utilización de Git para el control de versiones.
-   - Aplicar el principio DRY (Don't Repeat Yourself).
-   - Crear pruebas unitarias para componentes críticos.
+### 1. Modelo `Producto` en `models.py`:
 
-3. **Integración de funcionalidades y testing:** 
-   - Integrar las funcionalidades desarrolladas.
-   - Probar la aplicación en diferentes escenarios.
-   - Realizar correcciones de errores y optimizaciones necesarias.
+from django.db import models
 
-#### Día 6-7: Revisión y Documentación
-1. **Revisión de código:** Fomentar revisiones entre pares para mejorar la calidad del código y fomentar la colaboración.
-2. **Documentación:** Documentar el código y crear un README claro y conciso para el repositorio del proyecto. Debe incluir:
-   - Descripción del proyecto.
-   - Instrucciones de instalación y uso.
-   - Tecnologías utilizadas.
-   - Créditos y contribuciones.
+class Producto(models.Model):
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
 
-### Semana 2: Enfoque en CV y Portafolio
+    def __str__(self):
+        return self.nombre
 
-#### Día 1-2: Actualización del CV
-1. **Revisión del formato y contenido:** Asegúrate de que el CV esté actualizado con:
-   - Información personal y de contacto.
-   - Experiencia laboral (incluye proyectos de clase o personales relevantes).
-   - Educación y certificaciones.
-   - Habilidades técnicas (enfatiza en Django y tecnologías relacionadas).
-   - Resumen profesional atractivo.
-   - Mi CV de ejemplo: https://cesarlpb.github.io/cv?lang=es
-     - Código de mi CV: https://github.com/cesarlpb/cesarlpb.github.io/blob/master/cv.html
+### 2. Formulario con ModelForm, en myapp/forms.py:
 
-2. **Personalización:** 
-   - Adaptar el CV según el tipo de empleo al que se aspira (desarrollador backend, fullstack, etc.).
-   - Incluir palabras clave relevantes para pasar filtros de ATS (Applicant Tracking Systems).
-   - Mi Linkedin: https://www.linkedin.com/in/cesarlpb89/
+from django import forms
+from .models import Producto
 
-#### Día 3-5: Creación del Portafolio Online
-1. **Selección de proyectos:** Incluir en el portafolio:
-   - El proyecto final desarrollado en la semana anterior.
-   - Otros proyectos relevantes que demuestren competencias clave.
-   - Mi portafolio: https://cesarlpb.github.io/
-     - Código de mi portafolio: https://github.com/cesarlpb/cesarlpb.github.io (index.html con Astro)
-     - Vídeo que lo explica: https://youtu.be/HEMvsJTBweY?si=zYQxOwj2D2WOTIyK
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'precio']
 
-2. **Plataformas de portafolio:**
-   - Crear una página web personal usando Django o herramientas como GitHub Pages, WordPress, etc.
-   - Asegurarse de que la navegación sea fácil y la presentación profesional.
-   - Github Pages es gratis
+### 3. Vistas basadas en clases (Class-Based Views), en myapp/views.py:
 
-3. **Presentación:** 
-   - Escribir descripciones claras para cada proyecto.
-   - Incluir capturas de pantalla, enlaces a demos y repositorios de código.
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Producto
+from .forms import ProductoForm
+from django.shortcuts import render
 
-#### Día 6-7: Estrategia de Búsqueda de Trabajo y Optimización
-1. **LinkedIn y redes profesionales:** 
-   - Actualizar LinkedIn con el nuevo CV, experiencia y proyectos.
-   - Optimizar el perfil con un resumen profesional que destaque habilidades clave.
-   - Mi Linkedin: https://www.linkedin.com/in/cesarlpb89/
+def index(request):
+    return render(request, 'index.html')
 
-2. **Networking:**
-   - Animar a los estudiantes a conectar con profesionales de la industria, asistir a eventos virtuales y unirse a grupos de discusión.
+class ProductoListView(ListView):
+    model = Producto
+    template_name = 'producto_list.html'
 
-3. **Simulación de entrevistas:**
-   - Realizar simulacros de entrevistas técnicas y de comportamiento.
-   - Prepararse para preguntas comunes y pruebas de código.
+class ProductoDetailView(DetailView):
+    model = Producto
+    template_name = 'producto_detail.html'
 
-**Objetivo:** conseguir 10 llamadas o entrevistas con reclutadores 🚀
+class ProductoCreateView(CreateView):
+    model = Producto
+    form_class = ProductoForm
+    template_name = 'producto_form.html'
+    success_url = reverse_lazy('producto_list')
 
-### Consejos Finales:
-- **Gestión del tiempo:** Recordad la importancia de gestionar bien su tiempo, dedicando horas específicas a cada tarea sin procrastinar.
-- **Calidad sobre cantidad:** Es mejor que presenten menos pero bien hecho, que intentar abarcar demasiado y no lograrlo.
-- **Feedback constante:** Proporciona retroalimentación a lo largo del proceso para corregir errores y mejorar la calidad de los entregables.
+class ProductoUpdateView(UpdateView):
+    model = Producto
+    form_class = ProductoForm
+    template_name = 'producto_form.html'
+    success_url = reverse_lazy('producto_list')
+
+class ProductoDeleteView(DeleteView):
+    model = Producto
+    template_name = 'producto_confirm_delete.html'
+    success_url = reverse_lazy('producto_list')
+
+
+### 4. Rutas en `urls.py`, en myapp/urls.py:
+
+from django.urls import path
+from .views import (
+    ProductoListView,
+    ProductoDetailView,
+    ProductoCreateView,
+    ProductoUpdateView,
+    ProductoDeleteView
+)
+
+urlpatterns = [
+    path('', ProductoListView.as_view(), name='producto_list'),
+    path('<int:pk>/', ProductoDetailView.as_view(), name='producto_detail'),
+    path('nuevo/', ProductoCreateView.as_view(), name='producto_create'),
+    path('<int:pk>/editar/', ProductoUpdateView.as_view(), name='producto_update'),
+    path('<int:pk>/borrar/', ProductoDeleteView.as_view(), name='producto_delete'),
+]
+
+### 5. HTMLs, en `myapp/templates`:
+
+#### `index.html`
+
+#### `producto_list.html`
+
+#### `producto_detail.html`
+
+#### `producto_form.html`
+
+#### `producto_confirm_delete.html`
+
+
+### 6. URLs del proyecto, en project/urls.py:
+
+from django.contrib import admin
+from django.urls import path, include
+from myapp.views import index 
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('productos/', include('myapp.urls')),
+    path('', index, name='index'),  
+]
+
+### 7. Se Migran los cambios a la base de datos:
+
+python manage.py makemigrations
+python manage.py migrate
+
+### 8. Se ejecuta en la ruta del proyecto del servidor
+
+python manage.py runserver
+
+### 9. Acceder con la URL:
+
+http://127.0.0.1:8000/
+
+### 10. Resultados de la aplicación.
+
