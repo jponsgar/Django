@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del Producto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+</head>
+<body>
+    <h1 style="text-align: center"><ins>{{ object.nombre }}</ins></h1>
+    <br><br><br><br>
+    <p>{{ object.descripcion }}</p>
+    <p>{{ object.precio }}</p>
+    <br><br><br><br>
+    <a href="{% url 'producto_update' object.pk %}">Editar</a>
+    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
+    <a href="{% url 'producto_list' %}">Volver a la lista</a>
+</body>
+</html>
+
+

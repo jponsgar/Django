@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if object %}Editar{% else %}Crear{% endif %} Producto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+</head>
+<body>
+    <h1 style="text-align: center"><ins>{% if object %}Editar{% else %}Crear{% endif %} Producto</ins></h1>
+    <br><br><br><br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
+    </form>
+    <br><br><br><br>
+    <ul>
+        <li>
+           <a href="{% url 'producto_list' %}">Volver a la lista</a>
+        </li>
+    </ul>
+</body>
+</html>
+
+
+

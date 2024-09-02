@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+</head>
+<body>
+    <h1 style="text-align: center"><ins>Lista de Productos</ins></h1>
+    <br><br><br><br>
+    <a href="{% url 'producto_create' %}"><h2><ins>Crear Producto</ins></h2></a>
+    <ul>
+        {% for producto in object_list %}
+            <li>
+                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a> - {{ producto.precio }}
+                <a href="{% url 'producto_update' producto.pk %}">Editar</a>
+                <a href="{% url 'producto_delete' producto.pk %}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <br><br><br><br>
+    <ul>
+        <li>
+          <a href="{% url 'index' %}">Volver a la página de inicio</a>
+        </li>
+    </ul>
+</body>
+</html>
+
+
+
+
