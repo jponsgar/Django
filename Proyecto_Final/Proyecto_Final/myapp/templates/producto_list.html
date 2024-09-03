@@ -2,12 +2,82 @@
 <html>
 <head>
     <title>Lista de Productos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css">
+<style>
+/* Style */
+ a:hover {
+ background-color: rgb(202, 202, 202);
+ color: #000000;
+ }
+ body {
+    font-family: Arial, sans-serif;
+}
+
+ header, footer {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    background-color:white;
+    color:balck;
+    text-align: center;
+}
+
+/* Menú de Navegación Responsive */
+ nav {
+    display: left;
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+ }
+
+ nav ul {
+    list-style-type: none;
+}
+
+ nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Columnas Flexibles para Artículos */
+ article {
+    display:flexbox;
+    padding: 20px;
+    color:#000000;
+}
+
+  section::after {
+   content: "";
+   display: table;
+   clear: both;
+}
+
+/* Responsive layout - Media Queries 600px */
+@media only screen and (max-width: 600px) {
+
+/* Columnas Flexibles para Artículos de menos 600px */
+  article p, article h2 {
+    display: flex;
+    justify-content:auto;
+    flex-wrap: wrap; 
+  }
+
+   footer {
+      display: flex;
+      flex-wrap: wrap;
+   }
+}
+   </style>
 </head>
 <body>
-    <h1 style="text-align: center"><ins>Lista de Productos</ins></h1>
-    <br><br><br><br>
-    <a href="{% url 'producto_create' %}"><h2><ins>Crear Producto</ins></h2></a>
+    <header>
+      <h1 style="text-align: center"><ins>Lista de Productos</ins></h1>
+    </header>
+    <nav>
+    <ul>
+           <a href="{% url 'producto_create' %}"><h2><ins>Crear Producto</ins></h2></a>
+    </ul>
+    </nav>
+    <section>
+      <article>
     <ul>
         {% for producto in object_list %}
             <li>
@@ -17,13 +87,19 @@
             </li>
         {% endfor %}
     </ul>
-    <br>
-    <br><br><br><br>
+    <br><br>
     <ul>
         <li>
           <a href="{% url 'index' %}">Volver a la página de inicio</a>
         </li>
     </ul>
+      </article>
+    </section>
+    <footer>
+      <p  style="text-align: center"><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
+      <br><br>
+      <ins style="text-align: center">Número teléfono</ins>: <a href="tel:+1234567890">+1234567890</a></p>
+    </footer>
 </body>
 </html>
 
