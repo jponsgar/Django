@@ -1,6 +1,7 @@
 """
-Para la gestión de Productos, se crea una página web usando Django:
-Se implementa con CRUD (Create, Read, Update, Delete), y se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
+Para la gestión de Productos de Papelería, se crea una página web usando Django:
+Se implementa con CRUD, lo cual permite realizar (Create, Read, Update, Delete) de los productos.
+Se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
 Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, CreateView, UpdateView y DeleteView. 
 Se crean formularios con ModelForm.
 """
@@ -139,7 +140,7 @@ urlpatterns = [
 python manage.py makemigrations
 python manage.py migrate
 
-### 8. Se ejecuta en la ruta del proyecto del servidor
+### 8. Se ejecuta en la ruta del proyecto del servidor desde la carpeta "Gestion_Productos"
 
 python manage.py runserver
 
@@ -148,4 +149,6 @@ python manage.py runserver
 http://127.0.0.1:8000/
 
 ### 10. Resultados de la aplicación.
+
+ En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs.
 
