@@ -32,7 +32,36 @@ Se crean formularios con ModelForm.
                                  |- settings.py
                                  |- urls.py
 
-### 1. Modelo `Producto` en `models.py`:
+
+### 1. Organigrama aplicación:
+
+                             -------------------
+                             -Pagina Principal -
+                             -------------------
+                                      |
+                                      |
+                         ------------------------------
+                         -Lista de Productos Papelería-
+                         ------------------------------
+                                      |
+                                      |
+        ------------------------------------------------------------
+        |                   |                   |                  |
+        |                   |                   |                  |
+  ----------------  ------------------  -----------------  -------------------
+  -Crear Producto-  -Detalle Producto-  -Editar Producto-  -Eliminar Producto-
+  ----------------  ------------------  -----------------  -------------------
+                            |  
+                            |  
+                   ---------------------
+                   |                   |
+                   |                   |
+            -----------------  -------------------
+            -Editar Producto-  -Eliminar Producto-
+            -----------------  -------------------
+
+
+### 2. Modelo `Producto` en `models.py`:
 
 from django.db import models
 
@@ -44,7 +73,7 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
-### 2. Formulario con ModelForm, en myapp/forms.py:
+### 3. Formulario con ModelForm, en myapp/forms.py:
 
 from django import forms
 from .models import Producto
@@ -54,7 +83,7 @@ class ProductoForm(forms.ModelForm):
         model = Producto
         fields = ['nombre', 'descripcion', 'precio']
 
-### 3. Vistas basadas en clases (Class-Based Views), en myapp/views.py:
+### 4. Vistas basadas en clases (Class-Based Views), en myapp/views.py:
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -91,7 +120,7 @@ class ProductoDeleteView(DeleteView):
     success_url = reverse_lazy('producto_list')
 
 
-### 4. Rutas en `urls.py`, en myapp/urls.py:
+### 5. Rutas en `urls.py`, en myapp/urls.py:
 
 from django.urls import path
 from .views import (
@@ -110,7 +139,7 @@ urlpatterns = [
     path('<int:pk>/borrar/', ProductoDeleteView.as_view(), name='producto_delete'),
 ]
 
-### 5. HTMLs, en `myapp/templates`:
+### 6. HTMLs, en `myapp/templates`:
 
 #### `index.html`
 
@@ -123,7 +152,7 @@ urlpatterns = [
 #### `producto_confirm_delete.html`
 
 
-### 6. URLs del proyecto, en project/urls.py:
+### 7. URLs del proyecto, en project/urls.py:
 
 from django.contrib import admin
 from django.urls import path, include
@@ -135,20 +164,19 @@ urlpatterns = [
     path('', index, name='index'),  
 ]
 
-### 7. Se Migran los cambios a la base de datos:
+### 8. Se Migran los cambios a la base de datos:
 
 python manage.py makemigrations
 python manage.py migrate
 
-### 8. Se ejecuta en la ruta del proyecto del servidor desde la carpeta "Gestion_Productos"
+### 9. Se ejecuta en la ruta del proyecto del servidor desde la carpeta "Gestion_Productos"
 
 python manage.py runserver
 
-### 9. Acceder con la URL:
+### 10. Acceder con la URL:
 
 http://127.0.0.1:8000/
 
-### 10. Resultados de la aplicación.
+### 11. Resultados de la aplicación.
 
  En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs.
-
