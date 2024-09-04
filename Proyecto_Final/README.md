@@ -5,9 +5,31 @@ Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, Cre
 Se crean formularios con ModelForm.
 """
 
-### 0. Diagrama de la aplicación:
+### 0. Organización de directorios y principales ficheros creados o modificados:
 
-
+- Gestion_Productos__
+                     |
+                     |- myapp____
+                     |           |- __pycache__
+                     |           |- migrations
+                     |           |- static_____
+                     |           |             |- favicon.jpg
+                     |           |             |- stiles.css
+                     |           |- templates__
+                     |                         |- index.html
+                     |                         |- producto_confirm_delete.html
+                     |                         |- producto_detail.html
+                     |                         |- producto_form.html
+                     |                         |- producto_list.html
+                     |- forms.py
+                     |- models.py
+                     |- urls.py
+                     |- views.py
+                     |
+                     |- project__
+                                 |- __pycache__
+                                 |- settings.py
+                                 |- urls.py
 
 ### 1. Modelo `Producto` en `models.py`:
 

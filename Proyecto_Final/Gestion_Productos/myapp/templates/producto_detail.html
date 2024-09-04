@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalle del Producto</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+      <h1><ins>{{ object.nombre }}</ins></h1>
+    </header>
+    <br><br><br><br>
+    <section>
+      <article>
+        <ul>
+          <li>
+    <p>{{ object.descripcion }}</p>
+    <p>{{ object.precio }}</p>
+    <br><br><br><br>
+    <a href="{% url 'producto_update' object.pk %}">Editar</a>
+    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
+    <a href="{% url 'producto_list' %}">Volver a la lista</a>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <br><br><br><br><br><br><br>
+    <footer>
+      <p  style="text-align: center"><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
+      <br><br>
+      <ins style="text-align: center">Número teléfono</ins>: <a href="tel:+1234567890">+1234567890</a></p>
+    </footer>
+</body>
+</html>

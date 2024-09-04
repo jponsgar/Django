@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eliminar Producto</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+      <h1><ins>Eliminar Producto</ins></h1>
+    </header>
+    <br><br><br><br>
+    <section>
+      <article>
+      <ul>
+        <li>
+          <p>¿Estás seguro de que deseas eliminar el producto "{{ object.nombre }}"?</p>
+        </li>
+      </ul>
+    <form method="post">
+        {% csrf_token %}
+          <button type="submit">Sí, eliminar</button>
+    </form>
+    <br><br><br><br>
+    <ul>
+        <li>
+          <a href="{% url 'producto_list' %}">Cancelar</a>
+        </li>
+    </ul>
+      </article>
+    </section>
+     <br><br><br><br><br><br>
+    <footer>
+      <p  style="text-align: center"><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
+      <br><br>
+      <ins style="text-align: center">Número teléfono</ins>: <a href="tel:+1234567890">+1234567890</a></p>
+    </footer>
+</body>
+</html>
+

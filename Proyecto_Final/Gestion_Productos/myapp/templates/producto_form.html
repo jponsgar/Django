@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% if object %}Editar{% else %}Crear{% endif %} Producto</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+      <h1><ins>{% if object %}Editar{% else %}Crear{% endif %} Producto</ins></h1>
+    </header>
+    <br>
+    <section>
+      <article>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
+    </form>
+    <br>
+    <ul>
+        <li>
+           <a href="{% url 'producto_list' %}">Volver a la lista</a>
+        </li>
+    </ul>
+      </article>
+    </section>
+     <br>
+    <footer>
+      <p  style="text-align: center"><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
+      <br><br>
+      <ins style="text-align: center">Número teléfono</ins>: <a href="tel:+1234567890">+1234567890</a></p>
+    </footer>
+</body>
+</html>
