@@ -10,13 +10,14 @@
     <header>
       <h1><ins>Lista de Productos</ins></h1>
     </header>
-    <nav>
-    <ul>
-           <a href="{% url 'producto_create' %}"><h2><ins>Crear Producto</ins></h2></a>
-    </ul>
-    </nav>
     <section>
       <article>
+    <ul>
+        <li>
+           <a href="{% url 'producto_create' %}" style="color: rgb(0, 200, 0);"><ins>Crear Producto</ins></a>
+        </li>
+    </ul>
+    <br><br>
     <ul>
         {% for producto in object_list %}
             <li>

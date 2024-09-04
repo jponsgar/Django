@@ -16,7 +16,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
+        <button type="submit" style="background-color:rgb(0, 255, 0);">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
     </form>
     <br>
     <ul>
