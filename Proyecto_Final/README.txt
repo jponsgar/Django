@@ -1,10 +1,10 @@
-"""
 Para la gestión de Productos de Papelería, se crea una página web usando Django:
-Se implementa con CRUD, lo cual permite realizar (Create, Read, Update, Delete) de los productos.
-Se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
-Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, CreateView, UpdateView y DeleteView. 
-Se crean formularios con ModelForm.
-"""
+
+ . Se implementa con CRUD, lo cual permite realizar (Create, Read, Update, Delete) de los productos.
+ . Se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
+ . Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, CreateView, UpdateView y DeleteView. 
+ . Se crean formularios con ModelForm.
+
 
 ### 0. Organización de directorios y principales ficheros creados o modificados:
 
