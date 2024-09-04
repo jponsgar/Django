@@ -169,7 +169,7 @@ urlpatterns = [
 python manage.py makemigrations
 python manage.py migrate
 
-### 9. Se ejecuta en la ruta del proyecto del servidor desde la carpeta "Gestion_Productos"
+### 9. Se ejecuta en la ruta del proyecto del servidor desde el directorio "Gestion_Productos"
 
 python manage.py runserver
 
