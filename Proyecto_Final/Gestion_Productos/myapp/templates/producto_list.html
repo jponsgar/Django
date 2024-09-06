@@ -11,29 +11,30 @@
       <h1><ins>Lista de Productos</ins></h1>
     </header>
     <section>
-      <article>
+    <article>
     <ul>
         <li>
            <a href="{% url 'producto_create' %}" style="color: rgb(0, 200, 0);"><ins>Crear Producto</ins></a>
         </li>
     </ul>
     <br><br>
+    <div>
     <ul>
         {% for producto in object_list %}
-            <li>
-                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a> - {{ producto.precio }}
+                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a> => {{ producto.precio }}€ -
                 <a href="{% url 'producto_update' producto.pk %}">Editar</a>
                 <a href="{% url 'producto_delete' producto.pk %}">Eliminar</a>
-            </li>
+                <br>
         {% endfor %}
     </ul>
+    </div>
     <br><br>
     <ul>
         <li>
           <a href="{% url 'index' %}">Volver a la página de inicio</a>
         </li>
     </ul>
-      </article>
+    </article>
     </section>
      <br><br><br><br><br><br><br>
     <footer>
