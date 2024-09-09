@@ -192,3 +192,4 @@ http://127.0.0.1:8000/
 ### 11. Resultados de la aplicación.
 
  En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", en PDF.
+ También se añade pantallazo "GitHub" de los últimos commits.
