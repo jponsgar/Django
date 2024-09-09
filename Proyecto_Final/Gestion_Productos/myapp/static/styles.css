@@ -45,9 +45,14 @@
     padding: 10px;
 }
 
- section div {
-    margin-left: 90px;
+ ul button {
+    margin-left: 15px;
     background-color: light-grey;
+    padding: 10px;
+}
+
+ section {
+    margin-left: 90px;
 }
 
   section::after {
@@ -56,18 +61,8 @@
    clear: both;
 }
 
-/* Responsive layout - Media Queries 600px */
-@media only screen and (max-width: 600px) {
-
-/* Columnas Flexibles para Artículos de menos 600px */
-  article p, article h2 {
-    display: flex;
-    justify-content:auto;
-    flex-wrap: wrap; 
+@media print {
+   div {
+    display: none;
   }
-
-   footer {
-      display: flex;
-      flex-wrap: wrap;
-   }
 }
