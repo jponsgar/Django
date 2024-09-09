@@ -10,18 +10,14 @@
     <header>
       <h1><ins>Lista de Productos</ins></h1>
     </header>
-    <section>
-    <article>
-    <ul>
+    <ul style="text-align:center;">
         {% for producto in object_list %}
-                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a> => {{ producto.precio }}€ -
-                <a href="{% url 'producto_update' producto.pk %}">Editar</a>
-                <a href="{% url 'producto_delete' producto.pk %}">Eliminar</a>
+                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a> -
+                <a href="{% url 'producto_detail' producto.pk %}"></a>{{ producto.descripcion }} => {{ producto.precio }}€ 
                 <br><br>
         {% endfor %}
     </ul>
-    </article>
-    </section>
+    <br><br>
     <div>
     <ul>
         <li>
