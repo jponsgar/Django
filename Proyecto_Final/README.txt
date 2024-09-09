@@ -50,8 +50,15 @@ Para la gestión de Productos de Papelería, se crea una página web usando Djan
   ------------------  ----------------  -------------------  ------------------------------
   -Detalle Producto-  -Crear Producto-  -Imprimir Productos- -Volver a la página de inicio-
   ------------------  ----------------  -------------------  ------------------------------
-        |  
-        |  
+        |                   |
+        |                   |
+        |                   ---------------------
+        |                   |                   |
+        |                   |                   |
+        |                -------        -------------------   
+        |                -Crear-        -Volver a la lista-
+        |                -------        -------------------
+        |
         -------------------------------------------------------------
         |                                       |                   |
         |                                       |                   |
@@ -184,4 +191,4 @@ http://127.0.0.1:8000/
 
 ### 11. Resultados de la aplicación.
 
- En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs.
+ En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", en PDF.
