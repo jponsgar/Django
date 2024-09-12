@@ -2,32 +2,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lista de Productos</title>
+  <title>Lista de Clientes</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>Lista de Productos</ins></h1>
+      <h1><ins>Lista de Clientes</ins></h1>
     </header>
     <a name="top"></a>
     <article>
     <ul style="text-align:center;">
-        {% for producto in object_list %}
-                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.producto }}</a> -
-                <a href="{% url 'producto_detail' producto.pk %}"></a>{{ producto.descripcion }} => {{ producto.precio }}€ 
-                <br>
-        {% endfor %}
-    </ul>
+    {% for cliente in object_list %}
+            <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }}
+            {{ cliente.apellido }}</a>
+            - Correo: {{ cliente.correo }}
+    <br>
+    {% endfor %}
+</ul>
     </article>
     <div>
     <ul>
         <li>
-           <a href="{% url 'producto_create' %}" style="color: rgb(0, 200, 0);"><ins>Crear Producto</ins></a>
+<a href="{% url 'cliente_create' %}" style="color: rgb(0, 200, 0);"><ins>Crear Cliente</ins></a>
         </li>
     </ul>
     <ul>
-    <button onclick="window.print();">Imprimir Productos</button>
+    <button onclick="window.print();">Imprimir Clientes</button>
         <br><br>
         <li>
            <a href="#top">Volver al inicio</a>

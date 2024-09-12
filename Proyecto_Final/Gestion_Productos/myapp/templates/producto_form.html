@@ -18,14 +18,15 @@
         {{ form.as_p }}
         <button type="submit" style="background-color:rgb(0, 255, 0);">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
     </form>
+      </article>
+    </section>
     <br>
     <ul>
         <li>
            <a href="{% url 'producto_list' %}">Volver a la lista</a>
         </li>
     </ul>
-      </article>
-    </section>
+    <br><br><br><br>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
       <br><br>

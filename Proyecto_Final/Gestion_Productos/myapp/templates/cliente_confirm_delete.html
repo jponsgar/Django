@@ -2,32 +2,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Detalle del Producto</title>
+  <title>Eliminar Cliente</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>{{ object.producto }}</ins></h1>
+      <h1><ins>Eliminar Cliente</ins></h1>
     </header>
     <br><br><br><br>
     <section>
       <article>
-        <ul>
-        <div>
-    <p>{{ object.descripcion }}</p>
-    <p>{{ object.precio }}€</p>
-    <a href="{% url 'producto_update' object.pk %}">Editar</a>
-    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
-    <br><br><br><br>
-        </div>
+      <ul>
         <li>
-    <a href="{% url 'producto_list' %}">Volver a la lista</a>
+          <p>¿Estás seguro de que deseas eliminar el cliente "{{ object.nombre }} {{ object.apellido }}"?</p>
         </li>
-        </ul>
+      </ul>
+    <form method="post">
+        {% csrf_token %}
+          <button type="submit">Sí, eliminar</button>
+    </form>
+    <br><br><br><br>
+    <ul>
+        <li>
+          <a href="{% url 'cliente_list' %}">Cancelar</a>
+        </li>
+    </ul>
       </article>
     </section>
-    <br><br><br><br><br>
+     <br><br><br><br><br>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
       <br><br>
@@ -35,3 +38,4 @@
     </footer>
 </body>
 </html>
+

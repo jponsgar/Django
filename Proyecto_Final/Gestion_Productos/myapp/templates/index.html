@@ -2,17 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Página Principal Productos</title>
+  <title>Página Principal Papelería</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-       <h1><ins>Página Principal de Productos Papelería</ins></h1>
+       <h1><ins>Página Principal Papelería</ins></h1>
     </header>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <article>
            <h3    style="text-align: center"><a href="{% url 'producto_list' %}">Lista de Productos Papelería</a></h3>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br>
+           <h3    style="text-align: center"><a href="{% url 'cliente_list' %}">Lista de Clientes Papelería</a></h3>
+    </article>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
       <br><br>

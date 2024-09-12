@@ -2,31 +2,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Detalle del Producto</title>
+  <title>{% if object %}Editar{% else %}Crear{% endif %} Cliente</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>{{ object.producto }}</ins></h1>
+      <h1><ins>{% if object %}Editar{% else %}Crear{% endif %} Cliente</ins></h1>
     </header>
-    <br><br><br><br>
+    <br>
     <section>
       <article>
-        <ul>
-        <div>
-    <p>{{ object.descripcion }}</p>
-    <p>{{ object.precio }}€</p>
-    <a href="{% url 'producto_update' object.pk %}">Editar</a>
-    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
-    <br><br><br><br>
-        </div>
-        <li>
-    <a href="{% url 'producto_list' %}">Volver a la lista</a>
-        </li>
-        </ul>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color:rgb(0, 255, 0);">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
+    </form>
       </article>
     </section>
+    <ul>
+        <li>
+           <a href="{% url 'cliente_list' %}">Volver a la lista</a>
+        </li>
+    </ul>
     <br><br><br><br><br>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
