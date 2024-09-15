@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Producto, Cliente, Factura
 from .forms import ProductoForm, ClienteForm, FacturaForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     return render(request, 'index.html')

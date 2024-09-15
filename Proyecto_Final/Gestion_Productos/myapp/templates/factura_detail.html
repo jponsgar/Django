@@ -18,9 +18,10 @@
     <p>Cliente: {{ object.nombre }}</p>
     <p>Producto: {{ object.producto }}</p>
     <p>Cantidad: {{ object.cantidad }}</p>
+    <p>Subtotal: {{ object.subtotal }}</p>
     <a href="{% url 'factura_update' object.pk %}">Editar</a>
     <a href="{% url 'factura_delete' object.pk %}">Eliminar</a>
-    <br><br><br><br>
+    <br><br>
         </div>
         <li>
     <a href="{% url 'factura_list' %}">Volver a la lista</a>

@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'myapp', 
 ]
 
-LOGIN_REDIRECT_URL = 'protected'  # Redirigir después del login
-LOGOUT_REDIRECT_URL = 'login'     # Redirigir después del logout
+# LOGIN_REDIRECT_URL = 'protected'  # Redirigir después del login
+# LOGOUT_REDIRECT_URL = 'login'     # Redirigir después del logout
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
