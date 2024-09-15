@@ -14,8 +14,7 @@
     <article>
     <ul style="text-align:center;">
     {% for cliente in object_list %}
-            <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }}
-            {{ cliente.apellido }}</a>
+            <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }}{{ cliente.apellido }}</a>
             - Correo: {{ cliente.correo }}
     <br>
     {% endfor %}

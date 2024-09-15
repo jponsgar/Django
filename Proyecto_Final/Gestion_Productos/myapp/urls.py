@@ -6,7 +6,9 @@ from .views import (
     ProductoUpdateView,
     ProductoDeleteView,
     ClienteListView, ClienteDetailView, ClienteCreateView, 
-    ClienteUpdateView, ClienteDeleteView
+    ClienteUpdateView, ClienteDeleteView,
+    FacturaListView, FacturaDetailView, FacturaCreateView, 
+    FacturaUpdateView, FacturaDeleteView
 )
 
 urlpatterns = [
@@ -23,5 +25,12 @@ urlpatterns = [
     path('clientes/nuevo/', ClienteCreateView.as_view(), name='cliente_create'),
     path('clientes/<int:pk>/editar/', ClienteUpdateView.as_view(), name='cliente_update'),
     path('clientes/<int:pk>/eliminar/', ClienteDeleteView.as_view(), name='cliente_delete'),
+
+    # URLs para Facturas
+    path('facturas/', FacturaListView.as_view(), name='factura_list'),
+    path('facturas/<int:pk>/', FacturaDetailView.as_view(), name='factura_detail'),
+    path('facturas/nuevo/', FacturaCreateView.as_view(), name='factura_create'),
+    path('facturas/<int:pk>/editar/', FacturaUpdateView.as_view(), name='factura_update'),
+    path('facturas/<int:pk>/eliminar/', FacturaDeleteView.as_view(), name='factura_delete'),
 ]
 

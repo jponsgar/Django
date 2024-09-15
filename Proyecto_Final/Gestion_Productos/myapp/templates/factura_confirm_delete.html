@@ -2,31 +2,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% if object %}Editar{% else %}Crear{% endif %} Cliente</title>
+  <title>Eliminar Pedido</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>{% if object %}Editar{% else %}Crear{% endif %} Cliente</ins></h1>
+      <h1><ins>Eliminar Pedido</ins></h1>
     </header>
-    <br>
+    <br><br><br><br>
     <section>
       <article>
+      <ul>
+        <li>
+          <p>¿Estás seguro de que deseas eliminar el pedido "{{ object.id }}"?</p>
+        </li>
+      </ul>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" style="background-color:rgb(0, 255, 0);">{% if object %}Actualizar{% else %}Crear{% endif %}</button>
+          <button type="submit">Sí, eliminar</button>
     </form>
-      </article>
-    </section>
-    <br>
+    <br><br><br><br>
     <ul>
         <li>
-           <a href="{% url 'cliente_list' %}">Volver a la lista</a>
+          <a href="{% url 'factura_list' %}">Cancelar</a>
         </li>
     </ul>
-    <br><br><br><br>
+      </article>
+    </section>
+     <br><br><br><br><br>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
       <br><br>
@@ -34,3 +38,4 @@
     </footer>
 </body>
 </html>
+
