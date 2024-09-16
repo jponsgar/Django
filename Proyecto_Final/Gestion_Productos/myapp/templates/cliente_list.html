@@ -14,7 +14,7 @@
     <article>
     <ul>
     {% for cliente in object_list %}
-            <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }}{{ cliente.apellido }}</a>
+            <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }} {{ cliente.apellido }}</a>
             - <b>Correo:</b> {{ cliente.correo }}
     <br>
     {% endfor %}

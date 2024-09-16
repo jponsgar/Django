@@ -1,10 +1,14 @@
-Para la gestión de Productos de Papelería, se crea una página web usando Django:
+Para la generación de Facturas Simples, se crea la aplicación "myapp" usando Django:
 
  . Se implementa con CRUD, lo cual permite realizar (Create, Read, Update, Delete) de los productos.
  . Se define el modelo Producto en models.py con los campos; nombre, descripción y precio. 
  . Se define el modelo Cliente en models.py con los campos; nombre, apellido y correo. 
+ . Se define el modelo Factura en models.py con los campos; nombre, producto, cantidad y subtotal. 
  . Se crean vistas basadas en clases (Class-Based Views); ListView, DetailView, CreateView, UpdateView y DeleteView. 
  . Se crean formularios con ModelForm.
+ . Se implementan formularios para crear facturas, seleccionando clientes y productos.
+ . Se crean plantillas para renderizar la información de la factura en formato HTML.
+ . Se crean usuarios y perfiles de usuarios, con login, para "Create, Update y Delete". Por defecto en la Página Principal se puede consultar e imprimir la listas de "Productos, Clientes y Facturas".
 
 
 ### 0. Organización de directorios y principales ficheros creados o modificados:
@@ -19,14 +23,18 @@ Para la gestión de Productos de Papelería, se crea una página web usando Djan
                      |           |             |- stiles.css
                      |           |- templates__
                      |                         |- index.html
-                     |                         |- producto_confirm_delete.html
-                     |                         |- producto_detail.html
-                     |                         |- producto_form.html
-                     |                         |- producto_list.html
                      |                         |- cliente_confirm_delete.html
                      |                         |- cliente_detail.html
                      |                         |- cliente_form.html
                      |                         |- cliente_list.html
+                     |                         |- producto_confirm_delete.html
+                     |                         |- producto_detail.html
+                     |                         |- producto_form.html
+                     |                         |- producto_list.html
+                     |                         |- factura_confirm_delete.html
+                     |                         |- factura_detail.html
+                     |                         |- factura_form.html
+                     |                         |- factura_list.html
                      |- forms.py
                      |- models.py
                      |- urls.py
@@ -38,80 +46,57 @@ Para la gestión de Productos de Papelería, se crea una página web usando Djan
                                  |- urls.py
 
 
-### 1. Organigrama aplicación:
-
-                                   index.html 
-                                       |
-                                       |
-             -------------------------------------------------------
-             |                                                     |
------------------------------                         -----------------------------
--Lista de Clientes Papelería-                         -Lista de Producto Papelería-
------------------------------                         -----------------------------
-             |                                                     |
-      cliente_list.html                                    producto_list.html
-             |                                                     |
-             |                            -------------------------------------------------------------
-             |                            |                   |                   |                   |
-             |                  producto_detail.html   producto_form.html         |                   |
-             |                            |                   |                   |                   |
-             |                   ------------------  ----------------  -------------------- ------------------------------
-             |                   -Detalle producto-  -Crear producto-  -Imprimir productos- -Volver a la página de inicio-
-             |                   ------------------  ----------------  -------------------- ------------------------------
-             |                            |                   |
-             |                            |                   |
-             |                            |                   ---------------------
-             |                            |                   |                   |
-             |                            |                   |                   |
-             |                            |                -------        -------------------   
-             |                            |                -Crear-        -Volver a la lista-
-             |                            |                -------        -------------------
-             |                            |
-             |                            -------------------------------------------------------------
-             |                            |                                       |                   |
-             |                    producto_form.html                   producto_confirm_delete        |
-             |                            |                                       |                   |
-             |                      ----------------                    -------------------  -------------------
-             |                     -Editar producto-                    -Eliminar producto-  -Volver a la lista-
-             |                      ----------------                    -------------------  -------------------
-             |                            |                                       |
-             |                            ---------------------                   --------------------- 
-             |                            |                   |                   |                   |
-             |                       ------------    -------------------    --------------        ----------
-             |                       -Actualizar-    -Volver a la lista-    -Si, Eliminar-        -Cancelar-
-             |                       ------------    -------------------    --------------        ---------- 
-             |
-             |_____________________________________________________
-                                                                   |
-                                         -------------------------------------------------------------
-                                         |                   |                   |                   |
-                                 cliente_detail.html   cliente_form.html         |                   |
-                                         |                   |                   |                   |
-                                -----------------  ---------------  -------------------  -----------------------------
-                                -Detalle cliente-  -Crear cliente-  -Imprimir clientes-  -Volver a la página de inicio-
-                                -----------------  ---------------  -------------------  -----------------------------
-                                         |                   |
-                                         |                   |
-                                         |                   ---------------------
-                                         |                   |                   |
-                                         |                   |                   |
-                                         |                -------        -------------------   
-                                         |                -Crear-        -Volver a la lista-
-                                         |                -------        -------------------
-                                         |
-                                         -------------------------------------------------------------
-                                         |                                       |                   |
-                                  cliente_form.html                    cliente_confirm_delete        |
-                                         |                                       |                   |
-                                   ---------------                    ------------------  -------------------
-                                  -Editar cliente-                    -Eliminar cliente-  -Volver a la lista-
-                                   ---------------                    ------------------  -------------------
-                                         |                                       |
-                                         ---------------------                   --------------------- 
-                                         |                   |                   |                   |
-                                    ------------    -------------------    --------------        ----------
-                                    -Actualizar-    -Volver a la lista-    -Si, Eliminar-        -Cancelar-
-                                    ------------    -------------------    --------------        ---------- 
+### 1.      Organigrama de la aplicación, desde la "Página Principal Papelería":
+                                                                |
+                                                            index.html 
+                                                                |
+                  ---------------------------------------------------------------------------------------------
+                  |                               |                             |                             |
+     -----------------------------    ----------------------------   ------------------------------     -----------------
+    -Lista de Facturas Papelería-    -Lista de Clientes Papelería-   -Lista de Productos Papelería-     -Login Papelería-
+    -----------------------------    -----------------------------   ------------------------------     -----------------
+               |                                 |                              |                             |
+        factura_list.html                 cliente_list.html             producto_list.html               /admin/login
+               |                                 |                              |                             |
+               |                                 |                              |       -----------------------------------------
+               |                                 |                              |       |     |       |       |         |       |
+               |                                 |                              |    /group /user /cliente /factura /producto /index
+               |                                 |                              |
+               |                                 |           ----------------------------------------------------
+               |                                 |           |                  |                               |
+               |                                 |   ------------------   -------------------- -----------------------------------------
+               |                                 |   -Detalle producto-   -Imprimir Productos- -Volver al incio | a la página de inicio-
+               |                                 |   ------------------   -------------------- -----------------------------------------
+               |                                 |           |
+               |                                 |   producto_detail.html
+               |                                 |           |   
+               |                                 |   -------------------
+               |                                 |   -Volver a la lista-
+               |                                 |   -------------------
+               |                                 |
+               |           -------------------------------------------------
+               |           |                     |                         |
+               |   -----------------   ------------------- ----------------------------------------
+               |   -Detalle cliente-   -Imprimir Clientes- -Volver al incio | a la página de inicio-
+               |   -----------------   ------------------- ----------------------------------------
+               |           |
+               |  cliente_detail.html
+               |           |   
+               |   -------------------
+               |   -Volver a la lista-
+               |   -------------------
+               |
+               ---------------------------------------------------
+               |                     |                           |
+       -----------------    ------------------- -----------------------------------------
+       -Detalle factura-    -Imprimir Facturas- -Volver al incio | a la página de inicio-
+       -----------------    ------------------- -----------------------------------------
+               |
+       factura_detail.html
+               |   
+       -------------------
+       -Volver a la lista-
+       -------------------
 
 
 ### 2. Modelo en `models.py`:
@@ -119,12 +104,12 @@ Para la gestión de Productos de Papelería, se crea una página web usando Djan
 from django.db import models
 
 class Producto(models.Model):
-    producto = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.producto
+        return self.nombre
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
@@ -134,28 +119,46 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
+class Factura(models.Model):
+    nombre = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+
+    def subtotal(self):
+        return self.cantidad * self.producto.precio
+
+    def __str__(self):
+        return f'{self.cantidad} x {self.producto.nombre}'
+
+
 ### 3. Formulario con ModelForm, en myapp/forms.py:
 
 from django import forms
-from .models import Producto, Cliente
+from .models import Producto, Cliente, Factura
 
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['producto', 'descripcion', 'precio']
+        fields = ['nombre', 'descripcion', 'precio']
 
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ['nombre', 'apellido', 'correo']
 
+class FacturaForm(forms.ModelForm):
+    class Meta:
+        model = Factura
+        fields = ['nombre', 'producto', 'cantidad']
+
+
 ### 4. Vistas basadas en clases (Class-Based Views), en myapp/views.py:
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Producto, Cliente
-from .forms import ProductoForm, ClienteForm
-from django.shortcuts import render
+from .models import Producto, Cliente, Factura
+from .forms import ProductoForm, ClienteForm, FacturaForm
+from django.shortcuts import render, redirect, get_object_or_404
 
 def index(request):
     return render(request, 'index.html')
@@ -212,6 +215,58 @@ class ClienteDeleteView(DeleteView):
     template_name = 'cliente_confirm_delete.html'
     success_url = reverse_lazy('cliente_list')
 
+# Vistas para Factura
+class FacturaListView(ListView):
+    model = Factura
+    template_name = 'factura_list.html'
+
+class FacturaDetailView(DetailView):
+    model = Factura
+    template_name = 'factura_detail.html'
+
+class FacturaCreateView(CreateView):
+    model = Factura
+    form_class = FacturaForm
+    template_name = 'factura_form.html'
+    success_url = reverse_lazy('factura_list')
+
+class FacturaUpdateView(UpdateView):
+    model = Factura
+    form_class = FacturaForm
+    template_name = 'factura_form.html'
+    success_url = reverse_lazy('factura_list')
+
+class FacturaDeleteView(DeleteView):
+    model = Factura
+    template_name = 'factura_confirm_delete.html'
+    success_url = reverse_lazy('factura_list')
+
+# Vistas para Cliente
+class ClienteListView(ListView):
+    model = Cliente
+    template_name = 'cliente_list.html'
+
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = 'cliente_detail.html'
+
+class ClienteCreateView(CreateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = 'cliente_form.html'
+    success_url = reverse_lazy('cliente_list')
+
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = 'cliente_form.html'
+    success_url = reverse_lazy('cliente_list')
+
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    template_name = 'cliente_confirm_delete.html'
+    success_url = reverse_lazy('cliente_list')
+
 
 ### 5. Rutas en `urls.py`, en myapp/urls.py:
 
@@ -223,7 +278,9 @@ from .views import (
     ProductoUpdateView,
     ProductoDeleteView,
     ClienteListView, ClienteDetailView, ClienteCreateView, 
-    ClienteUpdateView, ClienteDeleteView
+    ClienteUpdateView, ClienteDeleteView,
+    FacturaListView, FacturaDetailView, FacturaCreateView, 
+    FacturaUpdateView, FacturaDeleteView
 )
 
 urlpatterns = [
@@ -240,19 +297,19 @@ urlpatterns = [
     path('clientes/nuevo/', ClienteCreateView.as_view(), name='cliente_create'),
     path('clientes/<int:pk>/editar/', ClienteUpdateView.as_view(), name='cliente_update'),
     path('clientes/<int:pk>/eliminar/', ClienteDeleteView.as_view(), name='cliente_delete'),
+
+    # URLs para Facturas
+    path('facturas/', FacturaListView.as_view(), name='factura_list'),
+    path('facturas/<int:pk>/', FacturaDetailView.as_view(), name='factura_detail'),
+    path('facturas/nuevo/', FacturaCreateView.as_view(), name='factura_create'),
+    path('facturas/<int:pk>/editar/', FacturaUpdateView.as_view(), name='factura_update'),
+    path('facturas/<int:pk>/eliminar/', FacturaDeleteView.as_view(), name='factura_delete'),
 ]
+
 
 ### 6. HTMLs, en `myapp/templates`:
 
 #### `index.html`
-
-#### `producto_list.html`
-
-#### `producto_detail.html`
-
-#### `producto_form.html`
-
-#### `producto_confirm_delete.html`
 
 #### `cliente_list.html`
 
@@ -261,6 +318,22 @@ urlpatterns = [
 #### `cliente_form.html`
 
 #### `cliente_confirm_delete.html`
+
+#### `factura_list.html`
+
+#### `factura_detail.html`
+
+#### `factura_form.html`
+
+#### `factura_confirm_delete.html`
+
+#### `producto_list.html`
+
+#### `producto_detail.html`
+
+#### `producto_form.html`
+
+#### `producto_confirm_delete.html`
 
 
 ### 7. URLs del proyecto, en project/urls.py:
@@ -272,23 +345,40 @@ from myapp.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', include('myapp.urls')),
-    path('', index, name='index'),  
+    path('', index, name='index'),  # Configurar la URL principal
 ]
 
-### 8. Se Migran los cambios a la base de datos:
+
+### 8. Se registran los modelos en el admin (myapp/admin.py):
+
+from django.contrib import admin
+from .models import Cliente, Producto, Factura
+
+admin.site.register(Cliente)
+admin.site.register(Producto)
+admin.site.register(Factura)
+
+
+### 9. Se crea un superusuario para poder acceder al panel de administración:
+
+python manage.py createsuperuser
+
+
+### 10. Se Migran los cambios a la base de datos:
 
 python manage.py makemigrations
 python manage.py migrate
 
-### 9. Se ejecuta en la ruta del proyecto del servidor desde el directorio "Gestion_Productos"
+
+### 11. Se ejecuta en la ruta del proyecto del servidor desde el directorio "Gestion_Productos"
 
 python manage.py runserver
 
-### 10. Acceder con la URL:
+### 12. Acceder con la URL:
 
 http://127.0.0.1:8000/
 
-### 11. Resultados de la aplicación.
+### 13. Resultados de la aplicación.
 
- En la carpeta "Muestras_Aplicación", están los pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos" y "Lista de Clientes", en PDF.
+ En la carpeta "Muestras_Aplicación", están algunos pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", "Lista de Clientes" y "Lista de Facturas", en PDF.
  También se añade pantallazo "GitHub" de los últimos commits.
