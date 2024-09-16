@@ -8,15 +8,15 @@
 </head>
 <body>
     <header>
-      <h1><ins>Lista de Productos</ins></h1>
+      <h1>Lista de Productos</h1>
     </header>
     <a name="top"></a>
     <article>
-    <ul style="text-align:center;">
+    <ul>
         {% for producto in object_list %}
                 <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a>
                 <a href="{% url 'producto_detail' producto.pk %}"></a> 
-                - Descripción: {{ producto.descripcion }} - Precio: {{ producto.precio }}€ 
+                - <b>Descripción:</b> {{ producto.descripcion }} - <b>Precio:</b> {{ producto.precio }}€ 
                 <br>
         {% endfor %}
     </ul>
@@ -24,7 +24,7 @@
     <div>
     <ul>
     <button onclick="window.print();">Imprimir Productos</button>
-        <br><br><br><br>
+        <br><br><br>
         <li>
            <a href="#top">Volver al inicio</a>
         </li>

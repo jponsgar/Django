@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-      <h1><ins>Lista de Clientes</ins></h1>
+      <h1>Lista de Clientes</h1>
     </header>
     <a name="top"></a>
     <article>
-    <ul style="text-align:center;">
+    <ul>
     {% for cliente in object_list %}
             <a href="{% url 'cliente_detail' cliente.pk %}">{{ cliente.nombre }}{{ cliente.apellido }}</a>
-            - Correo: {{ cliente.correo }}
+            - <b>Correo:</b> {{ cliente.correo }}
     <br>
     {% endfor %}
 </ul>
@@ -23,7 +23,7 @@
     <div>
     <ul>
     <button onclick="window.print();">Imprimir Clientes</button>
-        <br><br><br><br>
+        <br><br><br>
         <li>
            <a href="#top">Volver al inicio</a>
         </li>

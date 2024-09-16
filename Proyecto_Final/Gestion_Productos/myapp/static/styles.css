@@ -3,17 +3,25 @@
  background-color: rgb(202, 202, 202);
  color: #000000;
  }
+
  body {
-    font-family: Arial, sans-serif;
+  font-size: 0.875rem;
+  font-family: var(--font-family-primary);
 }
 
  header, footer {
-   position:relative;
-   width: 100%;
-   margin: auto;
-   background-color: #9b9b9b;
-   color:white;
-   text-align: center;
+  width: auto;
+  height: auto;
+  display: flex;
+  position:relative;
+  justify-content:center;
+  padding: 10px 40px;
+  background-color: #417690;;
+  color: #ffc;
+}
+
+footer a {
+  color: whitesmoke;
 }
 
  article {

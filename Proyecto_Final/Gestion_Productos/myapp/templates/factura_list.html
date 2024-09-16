@@ -8,14 +8,14 @@
 </head>
 <body>
     <header>
-      <h1><ins>Lista de Facturas</ins></h1>
+      <h1>Lista de Facturas</h1>
     </header>
     <a name="top"></a>
     <article>
-    <ul style="text-align:center;">
+    <ul>
         {% for factura in object_list %}
-            <a href="{% url 'factura_detail' factura.pk %}">{{ factura.id }}</a> - Cliente: {{ factura.nombre }}
-            - Producto: {{ factura.producto }} - Cantidad: {{ factura.cantidad }} - Subtotal: {{ factura.subtotal }}
+            <a href="{% url 'factura_detail' factura.pk %}">{{ factura.id }}</a> - <b>Cliente:</b> {{ factura.nombre }}
+            - <b>Producto:</b> {{ factura.producto }} - <b>Cantidad:</b> {{ factura.cantidad }} - <b>Subtotal:</b> {{ factura.subtotal }}
                 <br>
         {% endfor %}
     </ul>
@@ -23,7 +23,7 @@
     <div>
     <ul>
     <button onclick="window.print();">Imprimir Facturas</button>
-        <br><br><br><br>
+        <br><br><br>
         <li>
            <a href="#top">Volver al inicio</a>
         </li>
