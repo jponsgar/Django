@@ -56,11 +56,11 @@ Para la generación de Facturas Simples, se crea la aplicación "myapp" usando D
     -Lista de Facturas Papelería-    -Lista de Clientes Papelería-   -Lista de Productos Papelería-     -Login Papelería-
     -----------------------------    -----------------------------   ------------------------------     -----------------
                |                                 |                              |                             |
-        factura_list.html                 cliente_list.html             producto_list.html               /admin/login
+        factura_list.html                 cliente_list.html             producto_list.html                  /admin
                |                                 |                              |                             |
                |                                 |                              |       -----------------------------------------
                |                                 |                              |       |     |       |       |         |       |
-               |                                 |                              |    /group /user /cliente /factura /producto /index
+               |                                 |                              |   /group /user /cliente /factura /producto index.html
                |                                 |                              |
                |                                 |           ----------------------------------------------------
                |                                 |           |                  |                               |
@@ -378,7 +378,12 @@ python manage.py runserver
 
 http://127.0.0.1:8000/
 
-### 13. Resultados de la aplicación.
+### 13. Usuario Administrador:
+
+User: Admin-1
+Password: Administrador-1
+
+### 14. Resultados de la aplicación.
 
  En la carpeta "Muestras_Aplicación", están algunos pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", "Lista de Clientes" y "Lista de Facturas", en PDF.
  También se añade pantallazo "GitHub" de los últimos commits.
