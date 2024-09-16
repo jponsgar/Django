@@ -2,26 +2,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Detalle Cliente</title>
+  <title>Detalle del Producto</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>{{ object.nombre }} {{ object.apellido }}</ins></h1>
+      <h1><ins>{{ object.nombre }}</ins></h1>
     </header>
     <br><br><br><br>
     <section>
       <article>
         <ul>
         <div>
-<p>Nombre: {{ object.nombre }}</p>
-<p>Apellido: {{ object.apellido }}</p>
-<p>Correo: {{ object.correo }}</p>
+    <p>Descripción: {{ object.descripcion }}</p>
+    <p>Precio: {{ object.precio }}€</p>
+    <a href="{% url 'producto_update' object.pk %}">Editar</a>
+    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
     <br><br><br><br><br><br>
         </div>
         <li>
-    <a href="{% url 'cliente_list' %}">Volver a la lista</a>
+    <a href="{% url 'producto_list' %}">Volver a la lista</a>
         </li>
         </ul>
       </article>

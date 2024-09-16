@@ -17,9 +17,7 @@
         <div>
     <p>Descripción: {{ object.descripcion }}</p>
     <p>Precio: {{ object.precio }}€</p>
-    <a href="{% url 'producto_update' object.pk %}">Editar</a>
-    <a href="{% url 'producto_delete' object.pk %}">Eliminar</a>
-    <br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
         </div>
         <li>
     <a href="{% url 'producto_list' %}">Volver a la lista</a>

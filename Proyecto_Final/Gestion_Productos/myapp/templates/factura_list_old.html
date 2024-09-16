@@ -2,29 +2,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lista de Productos</title>
+  <title>Lista de Pedidos</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-      <h1><ins>Lista de Productos</ins></h1>
+      <h1><ins>Lista de Pedidos</ins></h1>
     </header>
     <a name="top"></a>
     <article>
     <ul style="text-align:center;">
-        {% for producto in object_list %}
-                <a href="{% url 'producto_detail' producto.pk %}">{{ producto.nombre }}</a>
-                <a href="{% url 'producto_detail' producto.pk %}"></a> 
-                - Descripción: {{ producto.descripcion }} - Precio: {{ producto.precio }}€ 
+        {% for factura in object_list %}
+            <a href="{% url 'factura_detail' factura.pk %}">{{ factura.id }}</a> - Cliente: {{ factura.nombre }}
+            - Producto: {{ factura.producto }} - Cantidad: {{ factura.cantidad }} - Subtotal: {{ factura.subtotal }}
                 <br>
         {% endfor %}
     </ul>
     </article>
     <div>
     <ul>
-    <button onclick="window.print();">Imprimir Productos</button>
-        <br><br><br><br>
+        <li>
+           <a href="{% url 'factura_create' %}" style="color: rgb(0, 200, 0);"><ins>Crear Pedido</ins></a>
+        </li>
+    </ul>
+    <ul>
+    <button onclick="window.print();">Imprimir Pedidos</button>
+        <br><br>
         <li>
            <a href="#top">Volver al inicio</a>
         </li>

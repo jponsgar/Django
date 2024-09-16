@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Detalle del Pedido</title>
+  <title>Detalle de la Factura</title>
   <link rel="icon" type="image/x-icon" href="{% static 'favicon.jpg' %}">
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
@@ -19,9 +19,7 @@
     <p>Producto: {{ object.producto }}</p>
     <p>Cantidad: {{ object.cantidad }}</p>
     <p>Subtotal: {{ object.subtotal }}</p>
-    <a href="{% url 'factura_update' object.pk %}">Editar</a>
-    <a href="{% url 'factura_delete' object.pk %}">Eliminar</a>
-    <br><br>
+    <br><br><br><br>
         </div>
         <li>
     <a href="{% url 'factura_list' %}">Volver a la lista</a>
