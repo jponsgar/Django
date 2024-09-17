@@ -94,9 +94,11 @@ Para la generación de Facturas Simples, se crea la aplicación "myapp" usando D
                |
        factura_detail.html
                |   
-       -------------------
-       -Volver a la lista-
-       -------------------
+               -------------------------------
+               |                             |
+       ------------------ -----------------------------------------
+       -Imprimir Factura- -Volver a la Lista de Facturas Papelería-
+       ------------------ -----------------------------------------
 
 
 ### 2. Modelo en `models.py`:
@@ -384,5 +386,5 @@ Password: Administrador-1
 
 ### 14. Resultados de la aplicación.
 
- En la carpeta "Muestras_Aplicación", están algunos pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", "Lista de Clientes" y "Lista de Facturas", en PDF.
+ En la carpeta "Muestras_Aplicación", están algunos pantallazos de las diferentes URLs, y una impresión de la "Lista de Productos", "Lista de Clientes", "Lista de Facturas" y "Detalle de la Factura", en PDF.
  También se añade pantallazo "GitHub" de los últimos commits.

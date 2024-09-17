@@ -8,30 +8,62 @@
 </head>
 <body>
     <header>
-      <h1>{{ object.id }}</h1>
+      <h1><b>Papelería</b></h1>
     </header>
-    <br><br><br><br>
-    <section>
-      <article>
-        <ul>
-        <div>
-    <p><b>Cliente:</b> {{ object.nombre }}</p>
-    <p><b>Producto:</b> {{ object.producto }}</p>
-    <p><b>Cantidad:</b> {{ object.cantidad }}</p>
-    <p><b>Subtotal:</b> {{ object.subtotal }}€</p>
-    <br><br><br><br>
-        </div>
-        <li>
-    <a href="{% url 'factura_list' %}">Volver a la lista</a>
-        </li>
-        </ul>
-      </article>
-    </section>
-    <br><br><br><br><br>
+	<hr />
+	<h4>NIF : 0123456789</h4>
+	<h4>FACTURA : {{ object.id }}</h4>
+	<hr />
+	<h1 style="text-align: center;">FACTURA</h1> 
+        <h4>Barcelona, con fecha: <b id="fecha"></b></h4>
+        <h4><b>Cliente: {{ object.nombre }}</b></h4>
+        <h4><b>Correo: {{ object.nombre.correo }}</b></h4>
+<table class="table table-bordered">
+	<thead >
+		<tr >
+			<th style="text-align: center;">
+				<h4>Cantidad</h4>
+			</th>
+			<th style="text-align: center;">
+				<h4>Producto</h4>
+			</th>
+			<th style="text-align: center;">
+				<h4>Precio_Producto</h4>
+			</th>
+			<th style="text-align: center;">
+				<h4>Total</h4>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align: center;">{{ object.cantidad }}</td>
+			<td style="text-align: center;">{{ object.producto }}</td>
+			<td style="text-align: center;">{{ object.producto.precio }}€</td>
+			<td style="text-align: center;">{{ object.subtotal }}€</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+    <div>
+		<ul>
+		<button onclick="window.print();">Imprimir Factura</button>
+			<br><br>
+			<li>
+			  <a href="/productos/facturas/">Volver a la Lista de Facturas Papelería</a>
+			</li>
+		</ul>
+    </div>
     <footer>
       <p><ins>Email</ins>: <a href="mailto:email@dominio.com">email@dominio.com</a>
       <br><br>
       <ins>Número teléfono</ins>: <a href="tel:+1234567890">+1234567890</a></p>
     </footer>
 </body>
+<script>
+const d = new Date();
+const mes = d.getMonth() + 1
+const dd = d.getDate() + "/" + mes + "/" + d.getFullYear();
+document.getElementById("fecha").innerHTML = dd;
+</script> 
 </html>
