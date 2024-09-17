@@ -14,9 +14,9 @@
     <article>
     <ul>
         {% for factura in object_list %}
-            <a href="{% url 'factura_detail' factura.pk %}">{{ factura.id }}</a> - <b>Cliente:</b> {{ factura.nombre }}
-            - <b>Producto:</b> {{ factura.producto }} - <b>Cantidad:</b> {{ factura.cantidad }} - <b>Subtotal:</b> {{ factura.subtotal }}
-                <br>
+            <b>Factura:</b> <a href="{% url 'factura_detail' factura.pk %}">{{ factura.id }}</a> - <b>Cliente:</b> {{ factura.nombre }}
+          - <b>Producto:</b> {{ factura.producto }} - <b>Cantidad:</b> {{ factura.cantidad }} - <b>Subtotal:</b> {{ factura.subtotal }}€
+         <br>
         {% endfor %}
     </ul>
     </article>
