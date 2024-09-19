@@ -46,7 +46,7 @@ Para la generación de Facturas Simples, se crea la aplicación "myapp" usando D
                                  |- urls.py
 
 
-### 1.      Organigrama de la aplicación, desde la "Página Principal Papelería":
+### 1.  Diagrama de flujo de la aplicación, desde la "Página Principal Papelería":
                                                                 |
                                                             index.html 
                                                                 |
