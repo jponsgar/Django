@@ -185,3 +185,7 @@ python manage.py runserver
 Acceder a la ruta:
 
 http://127.0.0.1:8000
+
+### User: jpg
+### Email: jpg@correo.com
+### Psw: Jpg0001&
