@@ -1,7 +1,7 @@
 VsCode:
 
 En la ruta: 
-C:\Users\jpons\Code\Ejercicios\Django\myproject\snakeapp\
+Django\myproject\snakeapp\
 
 Ejecutar:
 python manage.py runserver 
