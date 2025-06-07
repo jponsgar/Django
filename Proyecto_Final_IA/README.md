@@ -19,12 +19,12 @@ class Paciente(models.Model):
         ('Masculino', 'Masculino'),
         ('Femenino', 'Femenino')
     ]
-    
+
     OBESIDAD_CHOICES = [
         ('Sí', 'Sí'),
         ('No', 'No')
     ]
-    
+
     nombre = models.CharField(max_length=10)
     edad = models.PositiveIntegerField()
     genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
@@ -34,9 +34,8 @@ class Paciente(models.Model):
     presion_arterial_diastolica = models.PositiveIntegerField()
     obesidad = models.CharField(max_length=2, choices=OBESIDAD_CHOICES)
     albumina = models.PositiveIntegerField()
-    
 
-    def __str__(self):
+    def__str__(self):
         return self.nombre
 
 ### 2. Crear el formulario con ModelForm, en `mi_app/forms.py`:
@@ -155,10 +154,10 @@ from mi_app.views import index
 urlpatterns = [
     path('', views.index, name='index'),
     path('pacientes/', PacienteListView.as_view(), name='paciente_list'),
-    path('<int:pk>/', PacienteDetailView.as_view(), name='paciente_detail'),
+    path('[int:pk](int:pk)/', PacienteDetailView.as_view(), name='paciente_detail'),
     path('nuevo/', PacienteCreateView.as_view(), name='paciente_create'),
-    path('<int:pk>/editar/', PacienteUpdateView.as_view(), name='paciente_update'),
-    path('<int:pk>/eliminar/', PacienteDeleteView.as_view(), name='paciente_delete'),
+    path('[int:pk](int:pk)/editar/', PacienteUpdateView.as_view(), name='paciente_update'),
+    path('[int:pk](int:pk)/eliminar/', PacienteDeleteView.as_view(), name='paciente_delete'),
     path('entrenar/', views.entrenar_view, name='entrenar'),
     path('crear_datos/', views.crear_datos_view, name='crear_datos'),
     path('datos_paciente/', views.datos_paciente_view, name='datos_paciente'),
@@ -174,12 +173,12 @@ class Paciente(models.Model):
         ('Masculino', 'Masculino'),
         ('Femenino', 'Femenino')
     ]
-    
+
     OBESIDAD_CHOICES = [
         ('Sí', 'Sí'),
         ('No', 'No')
     ]
-    
+
     nombre = models.CharField(max_length=10)
     edad = models.PositiveIntegerField()
     genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
@@ -189,9 +188,8 @@ class Paciente(models.Model):
     presion_arterial_diastolica = models.PositiveIntegerField()
     obesidad = models.CharField(max_length=2, choices=OBESIDAD_CHOICES)
     albumina = models.PositiveIntegerField()
-    
 
-    def __str__(self):
+    def__str__(self):
         return self.nombre
 
 ### 6. Crear htmls, en `mi_app/templates`:
@@ -199,7 +197,9 @@ class Paciente(models.Model):
 #### `index.html`
 
 <!DOCTYPE html>
+
 {% load static %}
+
 <html lang="es">
 <head>
     <meta name="descripcion" content="Pacientes Estadio ERC">
@@ -273,7 +273,7 @@ class Paciente(models.Model):
     </main>
   </div>
   <footer>
-    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
@@ -281,7 +281,9 @@ class Paciente(models.Model):
 #### `crear_datos.html`
 
 <!DOCTYPE html>
+
 {% load static %}
+
 <html lang="es">
 <head>
     <meta name="descripcion" content="Pacientes Estadio ERC">
@@ -317,7 +319,7 @@ class Paciente(models.Model):
     </main>
   </div>
   <footer>
-    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
@@ -325,7 +327,9 @@ class Paciente(models.Model):
 #### `entrenar.html`
 
 <!DOCTYPE html>
+
 {% load static %}
+
 <html lang="es">
 <head>
     <meta name="descripcion" content="Pacientes Estadio ERC">
@@ -361,7 +365,7 @@ class Paciente(models.Model):
     </main>
   </div>
   <footer>
-    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
@@ -369,7 +373,9 @@ class Paciente(models.Model):
 #### `datos_paciente.html`
 
 <!DOCTYPE html>
+
 {% load static %}
+
 <html lang="es">
 <head>
     <meta name="descripcion" content="Pacientes Estadio ERC">
@@ -399,7 +405,7 @@ class Paciente(models.Model):
     </main>
   </div>
   <footer>
-    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
@@ -407,7 +413,9 @@ class Paciente(models.Model):
 #### `resultado_paciente.html`
 
 <!DOCTYPE html>
+
 {% load static %}
+
 <html lang="es">
 <head>
     <meta name="descripcion" content="Pacientes Estadio ERC">
@@ -434,7 +442,7 @@ class Paciente(models.Model):
     </main>
   </div>
   <footer>
-    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
 </body>
 </html>
@@ -449,7 +457,7 @@ entrenar.py
 
 from django.contrib import admin
 from django.urls import path, include
-from mi_app.views import index 
+from mi_app.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -465,10 +473,7 @@ python manage.py migrate
 
 ### 10. Ejecutar el servidor desde la ruta `/mi_proyecto` :
 
-en bash:
-cd Proyecto_Final_IA
-cd mi_proyecto
-python runserver_open.py 
+bash: cd Proyecto_Final_IA / cd mi_proyecto / python runserver_open.py
 o
 python manage.py runserver
 
