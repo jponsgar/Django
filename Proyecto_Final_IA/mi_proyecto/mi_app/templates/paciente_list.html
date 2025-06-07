@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+{% block content %}
+    <h2>Lista de Pacientes</h2>
+    <br>
+    <ul>
+        {% for paciente in object_list %}
+            <li><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a></li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'paciente_create' %}">Añadir Paciente</a>
+{% endblock %}
+</body>
+</html>

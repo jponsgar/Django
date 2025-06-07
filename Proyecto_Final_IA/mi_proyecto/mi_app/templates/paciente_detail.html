@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+{% block content %}
+    <h2>{{ object.nombre }}</h2>
+    <ul>
+    <p>Edad: {{ object.edad }}</p>
+    <p>Genero: {{ object.genero }}</p>
+    <p>Creatinina: {{ object.creatinina }}</p>
+    <p>TFG: {{ object.tfg }}</p>
+    <p>Presion Arterial Sistolica: {{ object.presion_arterial_sistolica }}</p>
+    <p>Presion Arterial Diastolica: {{ object.presion_arterial_diastolica }}</p>
+    <p>Obesidad: {{ object.obesidad }}</p>
+    <p>Albumina: {{ object.albumina }}</p>
+    </ul>
+    <br>
+    <a href="{% url 'paciente_update' object.id %}">Editar</a> |
+    <a href="{% url 'paciente_delete' object.id %}">Eliminar</a> |
+    <a href="{% url 'datos_paciente' %}">Estadio ERC</a>
+{% endblock %}
+</body>
+</html>

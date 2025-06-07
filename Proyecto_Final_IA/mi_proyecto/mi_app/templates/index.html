@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta name="descripcion" content="Pacientes Estadio ERC">
+    <meta name="autor" content="Jordi">
+    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+    <header>
+      <h1><ins>Pacientes Estadio ERC</ins></h1>
+    </header>
+  <div class="container">
+    <nav class="sidebar">
+      <ul>
+          <br>
+          <li><a href="{% url 'crear_datos' %}">Crear Dataframe "Estadio ERC"</a></li>
+          <br>
+          <li><a href="{% url 'entrenar' %}">Entrenar Datos "Estadio ERC"</a></li>
+          <br>
+          <li><a href="{% url 'datos_paciente' %}">Introducir Datos Paciente</a></li>
+          <br>
+          <li><a href="https://chatgpt.com/g/g-790Fn3Dbs-kidney-gpt-ai-nephrology-expert-system" target="_blank">Kidney GPT: AI Nephrology Expert System</a></li>
+      </ul>
+    </nav>
+    <main class="contenido">
+        {% block content %}
+        {% endblock %}
+        <br>
+        <h2>¿Qué son los Estados de Enfermedad Renal Crónica?</h2>
+        <br>
+        <p>La Enfermedad Renal Crónica (ERC) se clasifica en cinco estados según la función renal medida por el 
+          Filtrado Glomerular Estimado (FGe). A medida que la enfermedad progresa, los riñones pierden su capacidad 
+          para filtrar desechos y líquidos de manera eficiente.</p>
+        <br>
+        <ul>
+            <li><strong>Estado 1:</strong> Daño renal con función normal (Tfg ≥ 90 ml/min).</li>
+            <li><strong>Estado 2:</strong> Disminución leve de la función renal (Tfg 60-89 ml/min).</li>
+            <li><strong>Estado 3:</strong> Disminución moderada de la función renal (Tfg 30-59 ml/min).</li>
+            <li><strong>Estado 4:</strong> Disminución grave de la función renal (Tfg 15-29 ml/min).</li>
+            <li><strong>Estado 5:</strong> Insuficiencia renal terminal (Tfg menor 15 ml/min o diálisis).</li>
+        </ul>
+        <br>
+        <h2>Parámetros de Analítica de Sangre con Indicios de ERC</h2>
+        <br>
+        <p>Existen varios indicadores en la analítica de sangre que pueden señalar la presencia de ERC:</p>
+        <br>
+        <ul>
+            <li><strong>Creatinina:</strong> Elevados niveles indican posible deterioro de la función renal.</li>
+            <li><strong>Filtrado Glomerular Estimado (Tfg):</strong> Menor Tfg sugiere un avance de la ERC.</li>
+            <li><strong>Albúmina:</strong> Valores bajos en sangre, puede indicar la pérdida de albúmina en orina, y una mala función renal.</li>
+        </ul>
+        <br>
+        <p>Dependiendo de algunos de estos valores, el paciente puede situarse en uno de los estados de la ERC mencionados anteriormente.</p>
+        <br>
+        <h2>Simulación del Estado ERC con Inteligencia Artificial</h2>
+        <br>
+        <p>Esta web tiene como propósito realizar simulaciones del estado 
+          ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.</p>
+          <br>
+        <p>El **SVM** es un algoritmo de aprendizaje supervisado que clasifica 
+          datos en distintas categorías. En este caso, se entrenará con historiales clínicos para predecir el estado 
+          de la ERC según los parámetros de análisis de sangre.</p>
+        <br>
+        <p>El proceso incluye:</p>
+        <br>
+        <ul>
+            <li><strong>Recopilación de datos de pacientes con antecedentes de ERC.</strong></li>
+            <li><strong>Entrenamiento del modelo con características clave.</strong></li>
+            <li><strong>Evaluación de nuevos pacientes para estimar su estado ERC.</strong></li>
+            <li><strong>Chatbot - Kidney GPT: AI Nephrology Expert System.</strong></li>
+        </ul>
+        <br>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
