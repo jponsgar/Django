@@ -24,10 +24,23 @@
         <a href="{% url 'index' %}">  Cancelar</a>
     </form>
     {% if resultado %}
-        <h2 style="text-align:center;">Resumen del Resultado</h2>
         <img src="{% static 'matriz_confusion.jpg' %}">
-        <pre>{{ resultado }}</pre>
         <br>
+        <ul>
+            <strong>Interpretación de la Matriz de Confusión:</strong>
+            <br><br>
+            <li><strong>Falsos Positivos (FP):</strong> Número de muestras incorrectamente clasificadas como positivas.</li>
+            <li><strong>Falsos Negativos (FN):</strong> Número de muestras incorrectamente clasificadas como negativas.</li>
+            <li><strong>Verdaderos Positivos (VP):</strong> Número de muestras correctamente clasificadas como positivas.</li>
+            <li><strong>Verdaderos Negativos (VN):</strong> Número de muestras correctamente clasificadas como negativas.</li>
+            <li><strong>Alta precisión y alto recall:</strong> El modelo de Machine Learning escogido maneja perfectamente esa clase.</li>
+            <li><strong>Alta precisión y bajo recall:</strong> El modelo no detecta la clase muy bien, pero cuando lo hace es altamente confiable.</li>
+            <li><strong>Baja precisión y alto recall:</strong> El modelo detecta bien la clase,  pero también incluye muestras de la otra clase.</li>
+            <li><strong>Baja precisión y bajo recall:</strong> El modelo no logra clasificar la clase correctamente.</li>
+        </ul>
+        <br><br>
+        <pre style="text-align:center;">{{ resultado }}</pre>
+        <br><br>
         <p style="text-align:center;">
         <a href="{% url 'index' %}">  Volver a la página Principal</a>
         </p>

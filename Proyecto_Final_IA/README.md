@@ -192,260 +192,18 @@ class Paciente(models.Model):
     def__str__(self):
         return self.nombre
 
-### 6. Crear htmls, en `mi_app/templates`:
+### 6. Htmls, en `mi_app/templates`:
 
-#### `index.html`
+## `index.html`
 
-<!DOCTYPE html>
+## `crear_datos.html`
 
-{% load static %}
+## `entrenar.html`
 
-<html lang="es">
-<head>
-    <meta name="descripcion" content="Pacientes Estadio ERC">
-    <meta name="autor" content="Jordi">
-    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
-    <header>
-      <h1><ins>Pacientes Estadio ERC</ins></h1>
-    </header>
-  <div class="container">
-    <nav class="sidebar">
-      <ul>
-          <br>
-          <li><a href="{% url 'crear_datos' %}">Crear Dataframe "Estadio ERC"</a></li>
-          <br>
-          <li><a href="{% url 'entrenar' %}">Entrenar Datos "Estadio ERC"</a></li>
-          <br>
-          <li><a href="{% url 'datos_paciente' %}">Introducir Datos Paciente</a></li>
-      </ul>
-    </nav>
-    <main class="contenido">
-        {% block content %}
-        {% endblock %}
-        <br>
-        <h2>¿Qué son los Estados de Enfermedad Renal Crónica?</h2>
-        <br>
-        <p>La Enfermedad Renal Crónica (ERC) se clasifica en cinco estados según la función renal medida por el 
-          Filtrado Glomerular Estimado (FGe). A medida que la enfermedad progresa, los riñones pierden su capacidad 
-          para filtrar desechos y líquidos de manera eficiente.</p>
-        <br>
-        <ul>
-            <li><strong>Estado 1:</strong> Daño renal con función normal (Tfg ≥ 90 ml/min).</li>
-            <li><strong>Estado 2:</strong> Disminución leve de la función renal (Tfg 60-89 ml/min).</li>
-            <li><strong>Estado 3:</strong> Disminución moderada de la función renal (Tfg 30-59 ml/min).</li>
-            <li><strong>Estado 4:</strong> Disminución grave de la función renal (Tfg 15-29 ml/min).</li>
-            <li><strong>Estado 5:</strong> Insuficiencia renal terminal (Tfg menor 15 ml/min o diálisis).</li>
-        </ul>
-        <br>
-        <h2>Parámetros de Analítica de Sangre con Indicios de ERC</h2>
-        <br>
-        <p>Existen varios indicadores en la analítica de sangre que pueden señalar la presencia de ERC:</p>
-        <br>
-        <ul>
-            <li><strong>Creatinina:</strong> Elevados niveles indican posible deterioro de la función renal.</li>
-            <li><strong>Filtrado Glomerular Estimado (Tfg):</strong> Menor Tfg sugiere un avance de la ERC.</li>
-            <li><strong>Albúmina:</strong> Valores bajos en sangre, puede indicar la pérdida de albúmina en orina, y una mala función renal.</li>
-        </ul>
-        <br>
-        <p>Dependiendo de algunos de estos valores, el paciente puede situarse en uno de los estados de la ERC mencionados anteriormente.</p>
-        <br>
-        <h2>Simulación del Estado ERC con Inteligencia Artificial</h2>
-        <br>
-        <p>Esta web tiene como propósito realizar simulaciones del estado 
-          ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.</p>
-          <br>
-        <p>El **SVM** es un algoritmo de aprendizaje supervisado que clasifica 
-          datos en distintas categorías. En este caso, se entrenará con historiales clínicos para predecir el estado 
-          de la ERC según los parámetros de análisis de sangre.</p>
-        <br>
-        <p>El proceso incluye:</p>
-        <br>
-        <ul>
-            <li><strong>Recopilación de datos de pacientes con antecedentes de ERC.</strong></li>
-            <li><strong>Entrenamiento del modelo con características clave.</strong></li>
-            <li><strong>Evaluación de nuevos pacientes para estimar su estado ERC.</strong></li>
-        </ul>
-        <br>
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
+## `datos_paciente.html`
 
-#### `crear_datos.html`
+## `resultado_paciente.html`
 
-<!DOCTYPE html>
-
-{% load static %}
-
-<html lang="es">
-<head>
-    <meta name="descripcion" content="Pacientes Estadio ERC">
-    <meta name="autor" content="Jordi">
-    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
-    <header>
-      <h1><ins>Crear Datos Entrenados</ins></h1>
-    </header>
-  <div class="container2">
-    <nav class="sidebar2">
-    </nav>
-     <main class="contenido">
-      <form method="post">
-        <br><br>
-        {% csrf_token %}
-        <button type="submit">Ejecutar creación</button>
-        <br><br>
-        <a href="{% url 'index' %}">  Cancelar</a>
-    </form>
-    {% if resultado %}
-        <h2>Resumen de los Datos</h2>
-        <br>
-        <pre>{{ resultado }}</pre>
-        <br><br>
-        <p style="text-align:center;">
-        <a href="{% url 'index' %}">  Volver a la página Principal</a>
-        </p>
-    {% endif %}
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
-
-#### `entrenar.html`
-
-<!DOCTYPE html>
-
-{% load static %}
-
-<html lang="es">
-<head>
-    <meta name="descripcion" content="Pacientes Estadio ERC">
-    <meta name="autor" content="Jordi">
-    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
-    <header>
-      <h1><ins>Entrenar modelo</ins></h1>
-    </header>
-  <div class="container2">
-    <nav class="sidebar2">
-    </nav>
-     <main class="contenido">
-      <form method="post">
-        <br><br>
-        {% csrf_token %}
-        <button type="submit">Ejecutar entrenamiento</button>
-        <br><br>
-        <a href="{% url 'index' %}">  Cancelar</a>
-    </form>
-    {% if resultado %}
-        <h2 style="text-align:center;">Resumen del Resultado</h2>
-        <img src="{% static 'matriz_confusion.jpg' %}">
-        <pre>{{ resultado }}</pre>
-        <br>
-        <p style="text-align:center;">
-        <a href="{% url 'index' %}">  Volver a la página Principal</a>
-        </p>
-    {% endif %}
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
-
-#### `datos_paciente.html`
-
-<!DOCTYPE html>
-
-{% load static %}
-
-<html lang="es">
-<head>
-    <meta name="descripcion" content="Pacientes Estadio ERC">
-    <meta name="autor" content="Jordi">
-    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
-    <header>
-      <h1><ins>Formulario de Datos del Paciente</ins></h1>
-    </header>
-  <div class="container2">
-    <nav class="sidebar2">
-    </nav>
-     <main class="contenido">
-      <form method="post">
-         <br><br>
-         {% csrf_token %}
-         <br><br>
-         {{ form.as_p }}
-         <br><br>
-         <button type="submit">Enviar</button>
-         <br><br>
-         <a href="{% url 'index' %}">  Cancelar</a>
-      </form>
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
-
-#### `resultado_paciente.html`
-
-<!DOCTYPE html>
-
-{% load static %}
-
-<html lang="es">
-<head>
-    <meta name="descripcion" content="Pacientes Estadio ERC">
-    <meta name="autor" content="Jordi">
-    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
-</head>
-<body>
-    <header>
-      <h1><ins>Resultado para {{ nombre }}</ins></h1>
-    </header>
-  <div class="container2">
-    <nav class="sidebar2">
-    </nav>
-     <main class="contenido">
-        <p style="text-decoration: underline;";>Estadio ERC Predicho para {{ nombre }} 'en amarillo': <strong>{{ estadio }}</strong></p>
-        <div>
-         {{ grafico_html|safe }}
-        <p style="text-align:center;">
-        <a href="{% url 'index' %}">  Volver a la página Principal</a>
-        </p>
-        </div>
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 Hospital ERC. Todos los derechos reservados.</p>
-  </footer>
-</body>
-</html>
 
 ### 7. Pythons, en `mi_app/scripts/`:
 
@@ -499,7 +257,6 @@ La Predicción automática del estadio ERC para el paciente introducido, usando 
 Visualización interactiva en 3D de los datos clínicos y el estadio predicho.
 El estadio predicho y el gráfico pueden ser usados para apoyar el diagnóstico y seguimiento clínico.
 
-
 **entrenar.py**
 
 Método de IA utilizado en entrenar.py
@@ -536,7 +293,6 @@ Archivo CSV con los datos originales y las predicciones del modelo.
 Matriz de confusión guardada como imagen para analizar el rendimiento.
 Resumen estadístico (mediana) de variables clínicas por estadio ERC.
 Este modelo puede ser usado posteriormente para predecir el estadio ERC de nuevos pacientes y apoyar el diagnóstico clínico.
-
 
 ### 8. Configurar las URLs del proyecto, en `project/urls.py`:
 

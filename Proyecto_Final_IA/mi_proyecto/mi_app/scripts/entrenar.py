@@ -79,6 +79,20 @@ svm.fit(X_train_scaled, y_train)
 # Predicciones
 y_pred = svm.predict(X_test_scaled)
 
+# falsos positivos y falsos negativos
+falsos_positivos = np.sum((y_pred == 1) & (y_test != 1))
+falsos_negativos = np.sum((y_pred != 1) & (y_test == 1))
+print(f"Falsos positivos: {falsos_positivos}")
+print(f"Falsos negativos: {falsos_negativos}")
+
+
+# verdaderos positivos y verdaderos negativos
+verdaderos_positivos = np.sum((y_pred == 1) & (y_test == 1))    
+verdaderos_negativos = np.sum((y_pred != 1) & (y_test != 1))
+print(f"Verdaderos positivos: {verdaderos_positivos}")
+print(f"Verdaderos negativos: {verdaderos_negativos}")
+print(f"Total de positivos: {np.sum(y_test == 1)}")
+
 # Métricas
 print("Exactitud:", accuracy_score(y_test, y_pred))
 print("\nReporte de clasificación:\n", classification_report(y_test, y_pred))
@@ -91,7 +105,8 @@ sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['ERC 1', 'ERC 2'
 # Generar predicciones para el conjunto de datos completo
 data['Prediccion Estadio ERC'] = svm.predict(scaler.transform(data[features]))
 plt.title('Matriz de Confusión')
-
+plt.xlabel('Predicción')
+plt.ylabel('Real')
 # plt.show()
 
 # guardar imagen en fichero jpg
@@ -110,6 +125,7 @@ data.to_csv('datos_aleatorios_resultado.csv', index=False)
 # Guardar el escalador
 joblib.dump(scaler, 'escalador.pkl')
 
+'''
 # calcular mediana por estadio ERC por 'Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad'
 mediana_por_estadio = data.groupby('Estadio ERC')[['Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad']].median().reset_index()
 
@@ -123,3 +139,4 @@ mediana_por_estadio['Estadio ERC'] = mediana_por_estadio['Estadio ERC'].astype(i
 
 # mostrar el resultado
 print("\nMediana por Estadio ERC:\n", mediana_por_estadio)
+'''

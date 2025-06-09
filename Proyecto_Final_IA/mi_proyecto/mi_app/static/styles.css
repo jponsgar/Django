@@ -83,3 +83,10 @@ a:hover {
 .contenido li {
   margin-left: 25px;
 }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+}
