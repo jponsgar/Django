@@ -38,13 +38,13 @@ def generar_datos_aleatorios(num_registros):
         presion_arterial_diastolica = int(random.randint(60, 120))
         Obesidad = random.choice(['Si', 'No'])
         albumina = int(random.uniform(20, 48))
-        if tfg > 90 and creatinina >= 0.3 and creatinina <= 1.3 and albumina <= 48 and albumina >= 34:
+        if tfg > 90 and creatinina >= 0.3 and creatinina <= 1.3 and albumina <= 50 and albumina >= 40:
             estadio_erc = int(1)
         elif tfg > 60 and tfg <= 90 and creatinina > 1.3 and creatinina <= 1.5 and albumina >= 38 and albumina < 48:
             estadio_erc = int(2)
         elif tfg >= 30 and tfg <= 60 and creatinina > 1.5 and creatinina <= 2.0 and albumina >= 35 and albumina < 38:
             estadio_erc = int(3)
-        elif tfg >= 15 and tfg < 30 and creatinina > 2.0 and creatinina <= 2.5 and albumina >= 30 and albumina < 38:
+        elif tfg >= 15 and tfg < 30 and creatinina > 2.0 and creatinina <= 2.5 and albumina >= 30 and albumina < 35:
             estadio_erc = int(4)
         elif tfg < 15 and creatinina > 2.5 and albumina < 30:
             estadio_erc = int(5)

@@ -1,4 +1,5 @@
 """
+
 Prompt: Implementar con Django un CRUD (Create, Read, Update, Delete) básico para un modelo. Definir el modelo Paciente en models.py con campos; Nombre, Fechas, 'Edad: int', 'Genero', 'Creatinina: float', 'TFG: int', 'Presion_Arterial_Sistolica: int ', 'Presion_Arterial_Diastolica: int', 'Obesidad', 'Albumina: int', 'Estacio_ERC: int'. Usar vistas basadas en clases (Class-Based Views) como ListView, DetailView, CreateView, UpdateView y DeleteView.  Crear formularios con ModelForm. Configurar las rutas y plantillas necesarias. Se solicitarán los datos del paciente manualmente; Nombre, Fechas, 'Edad', 'Genero: "Masculino" o "Femenino"', 'Creatinina: float', 'TFG: int', 'Presion Arterial Sistolica:int ', 'Presion Arterial Diastolica: int', 'Obesidad: "Sí" o "No"', 'Albumina: int''. Que se procesarán como entrada en el programa python datos_paciente.py, el cual sacará un print con el "Estadio ERC" y un html llamado Estadio_ERC.html, esta información deberá mostrarse en la web.
 También crear el urls.py y los htmls en la carpeta templates.
 """
@@ -192,6 +193,7 @@ class Paciente(models.Model):
     def__str__(self):
         return self.nombre
 
+
 ### 6. Htmls, en `mi_app/templates`:
 
 ## `index.html`
@@ -317,3 +319,11 @@ o
 python manage.py runserver
 
 Este python lanza la siguiente url: http://127.0.0.1:8000/
+
+<link rel="stylesheet" href="{% static 'styles.css' %}"/>
+
+<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
+
+<link rel="stylesheet" href="{% static 'styles.css' %}"/>
+
+<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
