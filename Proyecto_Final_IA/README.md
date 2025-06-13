@@ -319,11 +319,3 @@ o
 python manage.py runserver
 
 Este python lanza la siguiente url: http://127.0.0.1:8000/
-
-<link rel="stylesheet" href="{% static 'styles.css' %}"/>
-
-<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
-
-<link rel="stylesheet" href="{% static 'styles.css' %}"/>
-
-<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
