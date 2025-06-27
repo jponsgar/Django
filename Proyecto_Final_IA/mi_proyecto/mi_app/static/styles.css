@@ -24,7 +24,7 @@ header {
 
 .container2 {
   display: flex !important;
-  min-height: calc(102.33vh); /* Ajusta según el header/footer */
+  min-height: calc(100vh); /* Ajusta según el header/footer */
 }
 
 .sidebar {
@@ -89,4 +89,16 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 65%;
+}
+
+.boton {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.boton:hover {
+    background-color: #155a8a;
 }

@@ -71,13 +71,13 @@ if __name__ == "__main__":
     nombre_archivo = 'datos_aleatorios.csv'
     guardar_datos_csv(nombre_archivo, datos_aleatorios)
     print(f'Datos aleatorios nefrología en {nombre_archivo}')
-# Este script genera un archivo CSV con datos aleatorios relacionados con la salud renal.
-# Los datos incluyen ID, edad, fecha, género, creatinina, TFG, presión arterial, Obesidad, hipertensión y estadio de la ERC.
-# El archivo se guarda con el nombre 'datos_aleatorios.csv'.
-import pandas as pd
-df = pd.DataFrame(datos_aleatorios, columns=[
+    # Este script genera un archivo CSV con datos aleatorios relacionados con la salud renal.
+    # Los datos incluyen ID, edad, fecha, género, creatinina, TFG, presión arterial, Obesidad, hipertensión y estadio de la ERC.
+    # El archivo se guarda con el nombre 'datos_aleatorios.csv'.
+    import pandas as pd
+    df = pd.DataFrame(datos_aleatorios, columns=[
     'ID', 'Edad', 'Fecha', 'Genero', 'Creatinina', 'TFG',
     'Presion Arterial Sistolica', 'Presion Arterial Diastolica',
     'Obesidad', 'Albumina', 'Estadio ERC'
-])
-print(df.head())
+    ])
+    print(df.head())

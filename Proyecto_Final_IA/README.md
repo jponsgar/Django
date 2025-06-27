@@ -1,202 +1,28 @@
-"""
+# Proyecto Final IA: CRUD Django para Pacientes y Predicción de Estadio ERC
 
 Prompt: Implementar con Django un CRUD (Create, Read, Update, Delete) básico para un modelo. Definir el modelo Paciente en models.py con campos; Nombre, Fechas, 'Edad: int', 'Genero', 'Creatinina: float', 'TFG: int', 'Presion_Arterial_Sistolica: int ', 'Presion_Arterial_Diastolica: int', 'Obesidad', 'Albumina: int', 'Estacio_ERC: int'. Usar vistas basadas en clases (Class-Based Views) como ListView, DetailView, CreateView, UpdateView y DeleteView.  Crear formularios con ModelForm. Configurar las rutas y plantillas necesarias. Se solicitarán los datos del paciente manualmente; Nombre, Fechas, 'Edad', 'Genero: "Masculino" o "Femenino"', 'Creatinina: float', 'TFG: int', 'Presion Arterial Sistolica:int ', 'Presion Arterial Diastolica: int', 'Obesidad: "Sí" o "No"', 'Albumina: int''. Que se procesarán como entrada en el programa python datos_paciente.py, el cual sacará un print con el "Estadio ERC" y un html llamado Estadio_ERC.html, esta información deberá mostrarse en la web.
 También crear el urls.py y los htmls en la carpeta templates.
-"""
 
-### 0. Configuración e Instalación del Proyecto Django
+## 0. Configuración e Instalación del Proyecto Django
 
 pip install django
 python -m django startproject mi_proyecto
 cd mi_proyecto
 python -m django startapp mi_app
 
-### 1. Definir el modelo `Paciente` en `mi_app/models.py`:
+### 1. Crear `mi_app/models.py`
 
-from django.db import models
+### 2. Crear el formulario con ModelForm, en `mi_app/forms.py`
 
-class Paciente(models.Model):
-    GENERO_CHOICES = [
-        ('Masculino', 'Masculino'),
-        ('Femenino', 'Femenino')
-    ]
+### 3. Configurar las rutas en `urls.py`, en `mi_app/urls.py`
 
-    OBESIDAD_CHOICES = [
-        ('Sí', 'Sí'),
-        ('No', 'No')
-    ]
+### 4. Configurar las rutas en `views.py`, en `mi_app/views.py`
 
-    nombre = models.CharField(max_length=10)
-    edad = models.PositiveIntegerField()
-    genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
-    creatinina = models.FloatField(default=0)
-    tfg = models.PositiveIntegerField()
-    presion_arterial_sistolica = models.PositiveIntegerField()
-    presion_arterial_diastolica = models.PositiveIntegerField()
-    obesidad = models.CharField(max_length=2, choices=OBESIDAD_CHOICES)
-    albumina = models.PositiveIntegerField()
+### 5. Crear `mi_poyecto/urls.py`
 
-    def__str__(self):
-        return self.nombre
+### 6. Añadir mi_app `mi_poyecto/settings.py`
 
-### 2. Crear el formulario con ModelForm, en `mi_app/forms.py`:
-
-from django import forms
-
-class PacienteForm(forms.Form):
-    nombre = forms.CharField(max_length=10)
-    edad = forms.IntegerField(min_value=1)
-    genero = forms.ChoiceField(choices=[('1', 'Masculino'), ('0', 'Femenino')])
-    creatinina = forms.FloatField(label="Creatinina - mg/dL [ 0.30 - 1.30 ]", min_value=0.1)
-    tfg = forms.IntegerField(label="Tfg - [ >90 ml/min/1,73 m2 ]", min_value=1)
-    pas = forms.IntegerField(label="Presión Arterial Sistólica - [ <120 mm Hg ]", min_value=1)
-    pad = forms.IntegerField(label="Presión Arterial Diastólica - [ <80 mm Hg ]", min_value=1)
-    obesidad = forms.ChoiceField(choices=[('1', 'Sí'), ('0', 'No')])
-    albumina = forms.IntegerField(label="Albúmina - g/L [ 34 - 48 ]", min_value=1)
-
-### 3. Configurar las vistas basadas en clases `'Paciente`, `Entrenamiento`, etc. en `mi_app/views.py`:
-
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Paciente
-from .forms import PacienteForm
-from django.shortcuts import render
-import subprocess
-from django.views.decorators.csrf import csrf_exempt
-from .scripts.datos_paciente import procesar_paciente
-
-@csrf_exempt  # Solo para pruebas; mejor usar el token CSRF en producción
-def entrenar_view(request):
-    resultado = ""
-    if request.method == "POST":
-        try:
-            # Ejecutar el script Python
-            proceso = subprocess.run(
-                ['python3', 'mi_app/scripts/entrenar.py'],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            resultado = proceso.stdout if proceso.returncode == 0 else proceso.stderr
-        except Exception as e:
-            resultado = f"Error al ejecutar el script: {e}"
-
-    return render(request, 'entrenar.html', {'resultado': resultado})
-
-def crear_datos_view(request):
-    resultado = ""
-    if request.method == "POST":
-        try:
-            # Ejecutar el script Python
-            proceso = subprocess.run(
-                ['python3', 'mi_app/scripts/crear_datos.py'],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            resultado = proceso.stdout if proceso.returncode == 0 else proceso.stderr
-        except Exception as e:
-            resultado = f"Error al ejecutar el script: {e}"
-
-    return render(request, 'crear_datos.html', {'resultado': resultado})
-
-def datos_paciente_view(request):
-    if request.method == 'POST':
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            estadio, grafico_html = procesar_paciente(form.cleaned_data)
-            return render(request, 'resultado_paciente.html', {
-                'nombre': form.cleaned_data['nombre'],
-                'estadio': estadio,
-                'grafico_html': grafico_html
-            })
-        else:
-            # Si no es válido, re-renderiza con errores
-            return render(request, 'datos_paciente.html', {'form': form})
-    else:
-        form = PacienteForm()
-    return render(request, 'datos_paciente.html', {'form': form})
-
-def index(request):
-    return render(request, 'index.html')
-
-class PacienteListView(ListView):
-    model = Paciente
-    template_name = 'paciente_list.html'
-
-class PacienteDetailView(DetailView):
-    model = Paciente
-    template_name = 'paciente_detail.html'
-
-class PacienteCreateView(CreateView):
-    model = Paciente
-    form_class = PacienteForm
-    template_name = 'paciente_form.html'
-    success_url = reverse_lazy('paciente_list')
-
-class PacienteUpdateView(UpdateView):
-    model = Paciente
-    form_class = PacienteForm
-    template_name = 'paciente_form.html'
-    success_url = reverse_lazy('paciente_list')
-
-class PacienteDeleteView(DeleteView):
-    model = Paciente
-    template_name = 'paciente_confirm_delete.html'
-    success_url = reverse_lazy('paciente_list')
-
-### 4. Configurar las rutas en `urls.py`, en `mi_app/urls.py`:
-
-from django.urls import path
-from .views import PacienteListView, PacienteDetailView, PacienteCreateView, PacienteUpdateView, PacienteDeleteView
-from . import views
-from mi_app.views import index
-
-urlpatterns = [
-    path('', views.index, name='index'),
-    path('pacientes/', PacienteListView.as_view(), name='paciente_list'),
-    path('[int:pk](int:pk)/', PacienteDetailView.as_view(), name='paciente_detail'),
-    path('nuevo/', PacienteCreateView.as_view(), name='paciente_create'),
-    path('[int:pk](int:pk)/editar/', PacienteUpdateView.as_view(), name='paciente_update'),
-    path('[int:pk](int:pk)/eliminar/', PacienteDeleteView.as_view(), name='paciente_delete'),
-    path('entrenar/', views.entrenar_view, name='entrenar'),
-    path('crear_datos/', views.crear_datos_view, name='crear_datos'),
-    path('datos_paciente/', views.datos_paciente_view, name='datos_paciente'),
-    path('resultado_paciente/', views.datos_paciente_view, name='resultado_paciente'),
-]
-
-### 5. `mi_app/models.py`
-
-from django.db import models
-
-class Paciente(models.Model):
-    GENERO_CHOICES = [
-        ('Masculino', 'Masculino'),
-        ('Femenino', 'Femenino')
-    ]
-
-    OBESIDAD_CHOICES = [
-        ('Sí', 'Sí'),
-        ('No', 'No')
-    ]
-
-    nombre = models.CharField(max_length=10)
-    edad = models.PositiveIntegerField()
-    genero = models.CharField(max_length=10, choices=GENERO_CHOICES)
-    creatinina = models.FloatField(default=0)
-    tfg = models.PositiveIntegerField()
-    presion_arterial_sistolica = models.PositiveIntegerField()
-    presion_arterial_diastolica = models.PositiveIntegerField()
-    obesidad = models.CharField(max_length=2, choices=OBESIDAD_CHOICES)
-    albumina = models.PositiveIntegerField()
-
-    def__str__(self):
-        return self.nombre
-
-
-### 6. Htmls, en `mi_app/templates`:
-
-## `index.html`
+### 7. Crear Htmls, en `mi_app/templates`
 
 ## `crear_datos.html`
 
@@ -204,12 +30,25 @@ class Paciente(models.Model):
 
 ## `datos_paciente.html`
 
+## `entrenar_resultados.html`
+
+## `grafico_renal.html`
+
+## `grafico_tendencia.html`
+
+## `index.html`
+
+## `paciente_confirm_delete.html`
+
+## `paciente_detail.html`
+
+## `paciente_list`
+
 ## `resultado_paciente.html`
 
+### 8. Pythons, en `mi_app/scripts/`
 
-### 7. Pythons, en `mi_app/scripts/`:
-
-**crear_datos.py**
+## crear_datos.py
 
 Método de IA utilizado en crear_datos.py:
 
@@ -229,7 +68,7 @@ Resultado:
 El resultado es un archivo CSV con 6000 registros simulados de pacientes, cada uno con variables clínicas y el estadio de ERC asignado según reglas médicas básicas.
 Este archivo puede usarse posteriormente para entrenar o probar modelos de IA, pero el script en sí solo genera datos, no aplica IA.
 
-**datos_paciente.py**
+## datos_paciente.py
 
 Método de IA utilizado en datos_paciente.py
 
@@ -259,7 +98,7 @@ La Predicción automática del estadio ERC para el paciente introducido, usando 
 Visualización interactiva en 3D de los datos clínicos y el estadio predicho.
 El estadio predicho y el gráfico pueden ser usados para apoyar el diagnóstico y seguimiento clínico.
 
-**entrenar.py**
+## entrenar.py
 
 Método de IA utilizado en entrenar.py
 
@@ -296,26 +135,66 @@ Matriz de confusión guardada como imagen para analizar el rendimiento.
 Resumen estadístico (mediana) de variables clínicas por estadio ERC.
 Este modelo puede ser usado posteriormente para predecir el estadio ERC de nuevos pacientes y apoyar el diagnóstico clínico.
 
-### 8. Configurar las URLs del proyecto, en `project/urls.py`:
+### 9. Pythons, en `mi_app`
 
-from django.contrib import admin
-from django.urls import path, include
-from mi_app.views import index
+## modelo_predictivo.py
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('pacientes/', include('mi_app.urls')),
-    path('', index, name='index'),  # Configurar la URL principal
-]
+Modelo de IA utilizado
+En este proyecto se utiliza un modelo de Máquina de Vectores de Soporte (SVM) para predecir el estadio de la Enfermedad Renal Crónica (ERC) de los pacientes. El flujo es el siguiente:
 
-### 9. Migrar los cambios a la base de datos desde la ruta `/mi_proyecto` :
+Preprocesamiento:
+Los datos de los pacientes se escalan usando un objeto scaler previamente entrenado (probablemente un StandardScaler de scikit-learn), cargado desde el archivo escalador.pkl.
+
+Predicción:
+El modelo SVM, cargado desde modelo_entrenado.pkl, toma las variables clínicas del paciente (edad, género, creatinina, TFG, presión arterial, obesidad, albúmina) y predice el estadio de ERC.
+
+Actualización en base de datos:
+Si se predice para un paciente concreto, el estadio predicho se guarda en la base de datos en el campo erc del paciente.
+
+Resultado de la función
+La función construir_grafico_desde_bd devuelve:
+
+Un gráfico 3D interactivo generado con Plotly, que muestra la relación entre Creatinina, TFG y Albúmina, coloreando los puntos según el estadio de ERC.
+El nombre del paciente para el que se ha realizado la predicción.
+El estadio predicho por el modelo para ese paciente.
+Este resultado permite visualizar de forma clara el riesgo renal y comparar el caso del paciente con otros datos almacenados.
+
+Resumen:
+El modelo SVM predice el estadio de ERC a partir de variables clínicas, y el resultado se muestra en un gráfico 3D junto con el nombre y el estadio predicho del paciente.
+
+## modelo_predictivo2.py
+
+Modelo de IA utilizado
+En este caso, se utiliza un modelo de Regresión Lineal (LinearRegression de scikit-learn) para analizar la tendencia temporal de diferentes variables clínicas de un paciente concreto.
+El modelo aprende la evolución de cada variable (ERC, TFG, Creatinina, Albúmina) a lo largo del tiempo, usando el historial de registros del paciente.
+
+¿Qué hace la función?
+Recopila el historial del paciente ordenado por fecha.
+Para cada variable clínica (ERC, TFG, Creatinina, Albúmina):
+Ajusta un modelo de regresión lineal para estimar la tendencia de la variable a lo largo del tiempo.
+Proyecta la evolución de la variable durante los próximos 12 meses.
+Genera un gráfico interactivo con:
+Los valores reales históricos.
+La estimación de la tendencia.
+La proyección a futuro (1 año).
+Resultado
+La función devuelve un HTML con varios gráficos interactivos (uno por variable), donde se puede visualizar:
+
+La evolución real de cada variable clínica.
+La tendencia estimada por el modelo.
+La proyección de esa variable para el próximo año.
+Esto permite al usuario ver de forma visual y predictiva cómo podrían evolucionar los parámetros clínicos del paciente si la tendencia actual se mantiene.
+
+Resumen:
+Se usa regresión lineal para estimar y proyectar la evolución de variables clínicas de un paciente, mostrando los resultados en gráficos interactivos que permiten visualizar tanto el pasado como la posible evolución futura.
+
+### 10. Migrar los cambios a la base de datos desde la ruta `/mi_proyecto`
 
 bash: python manage.py makemigrations / python manage.py migrate
 
-### 10. Ejecutar el servidor desde la ruta `/mi_proyecto` :
+### 11. Ejecutar el servidor desde la ruta `/mi_proyecto`
 
-bash: cd Proyecto_Final_IA / cd mi_proyecto / python runserver_open.py
-o
-python manage.py runserver
+bash: cd Proyecto_Final_IA / cd mi_proyecto
+bash: python runserver_open.py ó python manage.py runserver
 
-Este python lanza la siguiente url: http://127.0.0.1:8000/
+Se lanza la siguiente url: http://127.0.0.1:8000/

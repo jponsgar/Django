@@ -75,9 +75,6 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'mi_proyecto.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -125,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "mi_app" / "static",
 ]
 
 # Default primary key field type

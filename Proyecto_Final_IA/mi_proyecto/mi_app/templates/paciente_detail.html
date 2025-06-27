@@ -1,26 +1,54 @@
+<!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="es">
 <head>
+    <meta name="descripcion" content="Pacientes Estadio ERC">
+    <meta name="autor" content="Jordi">
+    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
 {% block content %}
-    <h2>{{ object.nombre }}</h2>
+    <header>
+    <h1><ins>{{ object.nombre }}</ins></h1>
+    </header>
+      <div class="container2">
+    <nav class="sidebar2">
+    </nav>
+     <main class="contenido">
+      <form method="post">
+      {% csrf_token %}
     <ul>
+    <br><br>
+    <p>Nombre: {{ object.nombre }}</p>
     <p>Edad: {{ object.edad }}</p>
-    <p>Genero: {{ object.genero }}</p>
+    <p>Fecha Analítica: {{ object.fecha }}</p>
+    <p>Género: {% if object.genero == "1" %}Masculino{% else %}Femenino{% endif %}</p>
     <p>Creatinina: {{ object.creatinina }}</p>
-    <p>TFG: {{ object.tfg }}</p>
-    <p>Presion Arterial Sistolica: {{ object.presion_arterial_sistolica }}</p>
-    <p>Presion Arterial Diastolica: {{ object.presion_arterial_diastolica }}</p>
-    <p>Obesidad: {{ object.obesidad }}</p>
+    <p>Tfg: {{ object.tfg }}</p>
+    <p>Presión Arterial Sistólica: {{ object.presion_arterial_sistolica }}</p>
+    <p>Presión Arterial Diastólica: {{ object.presion_arterial_diastolica }}</p>
+    <p>Obesidad: {% if object.obesidad == "1" %}Sí{% else %}No{% endif %}</p>
     <p>Albumina: {{ object.albumina }}</p>
+    <p>ERC: {{ object.erc }}</p>
     </ul>
-    <br>
-    <a href="{% url 'paciente_update' object.id %}">Editar</a> |
+    <br><br>
     <a href="{% url 'paciente_delete' object.id %}">Eliminar</a> |
-    <a href="{% url 'datos_paciente' %}">Estadio ERC</a>
+    <a href="{% url 'paciente_update' object.id %}">Editar</a>
+    <br><br><br><br>
+    <a class="boton" href="{% url 'grafico_renal' object.id %}">Predecir Estadio</a> | 
+    <a class="boton" href="{% url 'grafico_tendencia' object.id %}">  Gráfico de Tendencia</a>
+    <br><br><br><br>
+    <p style="text-align:center;">
+    <a href="{% url 'paciente_list' %}">Volver </a>
+    </p>
 {% endblock %}
+      </form>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>

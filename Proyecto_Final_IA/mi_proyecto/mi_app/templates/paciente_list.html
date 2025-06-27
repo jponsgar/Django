@@ -1,20 +1,43 @@
+<!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="es">
 <head>
+    <meta name="descripcion" content="Pacientes Estadio ERC">
+    <meta name="autor" content="Jordi">
+    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
-{% block content %}
-    <h2>Lista de Pacientes</h2>
-    <br>
-    <ul>
+    <header>
+      <h1><ins>Lista Pacientes</ins></h1>
+    </header>
+  <div class="container2">
+    <nav class="sidebar2">
+    </nav>
+     <main class="contenido">
+      <form method="post">
+  {% block content %}
+      <br>
+      <ul>
         {% for paciente in object_list %}
-            <li><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a></li>
+            <li><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a>  |  {{ paciente.fecha }}</li>
+        {% empty %}
+            <li>No hay pacientes registrados.</li>
         {% endfor %}
-    </ul>
-    <br>
-    <a href="{% url 'paciente_create' %}">Añadir Paciente</a>
-{% endblock %}
+      </ul>
+      <br><br>
+      <a class="boton" href="{% url 'datos_paciente' %}">Añadir Paciente</a>
+  {% endblock %}
+        <br><br><br><br>
+        <p style="text-align:center;">
+        <a href="{% url 'index' %}">  Volver a la página Principal</a>
+        </p>
+      </form>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>

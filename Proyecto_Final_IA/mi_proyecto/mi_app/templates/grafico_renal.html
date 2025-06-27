@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta name="descripcion" content="Pacientes Estadio ERC">
+    <meta name="autor" content="Jordi">
+    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+</head>
+<body>
+    <header>
+    <h1><ins>Visualización del Estadio Renal Crónico</ins></h1>
+    </header>
+      <div class="container2">
+    <nav class="sidebar2">
+    </nav>
+    <main class="contenido">
+    <p style="text-decoration: underline;">Estadio ERC Predicho para el Paciente "{{ nombre }}" en amarillo: <strong>{{ estadio }}</strong></p>
+    {{ grafico|safe }}
+    <p style="text-align:center;">
+    <button class="boton" onclick="history.back();">VOLVER</button>
+    </p>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

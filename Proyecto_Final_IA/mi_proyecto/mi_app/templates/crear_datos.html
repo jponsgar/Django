@@ -19,19 +19,18 @@
       <form method="post">
         <br><br>
         {% csrf_token %}
-        <button type="submit">Ejecutar creación</button>
+        <button class="boton" type="submit">Ejecutar creación</button>
         <br><br>
-        <a href="{% url 'index' %}">  Cancelar</a>
     </form>
     {% if resultado %}
         <h2 style="text-align:center;">Resumen de los Datos</h2>
         <br>
         <pre style="text-align:center;">{{ resultado }}</pre>
         <br><br><br><br><br><br><br><br>
+    {% endif %}
         <p style="text-align:center;">
         <a href="{% url 'index' %}">  Volver a la página Principal</a>
         </p>
-    {% endif %}
     </main>
   </div>
   <footer>

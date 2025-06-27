@@ -1,17 +1,39 @@
+<!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="es">
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <meta name="descripcion" content="Pacientes Estadio ERC">
+    <meta name="autor" content="Jordi">
+    <title>{% block title %}Pacientes Estadio ERC{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
-{% block content %}
-    <h2>{{ object|default:"Nuevo Paciente" }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-{% endblock %}
+    <header>
+      <h1><ins>Editar Paciente "{{ object.nombre }}" en fecha "{{ object.fecha }}"</ins></h1>
+    </header>
+  <div class="container2">
+    <nav class="sidebar2">
+    </nav>
+     <main class="contenido">
+     {% block content %}
+      <form method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <br><br>
+        <button class="boton" type="submit">Guardar Cambios</button>
+     {% endblock %}
+        <br><br><br><br>
+        <p style="text-align:center;">
+        <a href="{% url 'paciente_detail' object.pk %}">  Volver</a>
+        </p>
+      </form>
+    </main>
+  </div>
+  <footer>
+    <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>

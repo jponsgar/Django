@@ -16,13 +16,13 @@
     <nav class="sidebar">
       <ul>
           <br>
-          <li><a href="{% url 'crear_datos' %}">Crear Dataframe "Estadio ERC"</a></li>
+          <li><a href="{% url 'crear_datos' %}">1. Crear: Dataframe_Simulado "Estadio ERC"</a></li>
           <br>
-          <li><a href="{% url 'entrenar' %}">Entrenar Datos "Estadio ERC"</a></li>
+          <li><a href="{% url 'entrenar' %}">2. Entrenar: Datos_Simulados "Estadio ERC"</a></li>
           <br>
-          <li><a href="{% url 'datos_paciente' %}">Introducir Datos Paciente</a></li>
+          <li><a href="{% url 'paciente_list' %}">3. Lista Pacientes</a></li>
           <br>
-          <li><a href="https://chatgpt.com/g/g-790Fn3Dbs-kidney-gpt-ai-nephrology-expert-system" target="_blank">Kidney GPT: AI Nephrology Expert System</a></li>
+          <li><a href="https://chatgpt.com/g/g-790Fn3Dbs-kidney-gpt-ai-nephrology-expert-system" target="_blank">4. Kidney GPT: AI Nephrology Expert System</a></li>
       </ul>
     </nav>
     <main class="contenido">
@@ -36,7 +36,7 @@
           para filtrar desechos y líquidos de manera eficiente.</p>
         <br>
         <ul>
-            <li><strong>Estado 1:</strong> Daño renal con función normal (Tfg ≥ 90 ml/min).</li>
+            <li><strong>Estado 1:</strong> Función renal normal (Tfg ≥ 90 ml/min).</li>
             <li><strong>Estado 2:</strong> Disminución leve de la función renal (Tfg 60-89 ml/min).</li>
             <li><strong>Estado 3:</strong> Disminución moderada de la función renal (Tfg 30-59 ml/min).</li>
             <li><strong>Estado 4:</strong> Disminución grave de la función renal (Tfg 15-29 ml/min).</li>
@@ -58,18 +58,23 @@
         <h2>Simulación del Estado ERC con Inteligencia Artificial</h2>
         <br>
         <p>Esta web tiene como propósito realizar simulaciones del estado 
-          ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.</p>
+          ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.
+          Y **Regresión Lineal** (LinearRegression de scikit-learn).</p>
           <br>
         <p>El **SVM** es un algoritmo de aprendizaje supervisado que clasifica 
           datos en distintas categorías. En este caso, se entrenará con historiales clínicos para predecir el estado 
           de la ERC según los parámetros de análisis de sangre.</p>
         <br>
+        <p>La **Regresión Lineal** (LinearRegression de scikit-learn) se utiliza para analizar la tendencia temporal de diferentes variables clínicas
+           de un paciente concreto. El modelo aprende la evolución de cada variable (ERC, TFG, Creatinina, Albúmina) a lo largo del tiempo,
+            usando el historial de registros del paciente.</p>
+         <br>
         <p>El proceso incluye:</p>
         <br>
         <ul>
             <li><strong>Recopilación de datos de pacientes con antecedentes de ERC.</strong></li>
             <li><strong>Entrenamiento del modelo con características clave.</strong></li>
-            <li><strong>Evaluación de nuevos pacientes para estimar su estado ERC.</strong></li>
+            <li><strong>Evaluación de nuevos pacientes para estimar su ERC y Tendencia.</strong></li>
             <li><strong>Chatbot - Kidney GPT: AI Nephrology Expert System.</strong></li>
         </ul>
         <br>

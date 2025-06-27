@@ -19,9 +19,13 @@
       <form method="post">
         <br><br>
         {% csrf_token %}
-        <button type="submit">Ejecutar entrenamiento</button>
+        <button class="boton" type="submit">Ejecutar entrenamiento</button>
         <br><br>
-        <a href="{% url 'index' %}">  Cancelar</a>
+        {% if messages %}
+          {% for message in messages %}
+            <div><strong>{{ message }}</strong></div>
+          {% endfor %}
+        {% endif %}
     </form>
     {% if resultado %}
         <img src="{% static 'matriz_confusion.jpg' %}">
@@ -41,10 +45,10 @@
         <br><br>
         <pre style="text-align:center;">{{ resultado }}</pre>
         <br><br>
+    {% endif %}
         <p style="text-align:center;">
         <a href="{% url 'index' %}">  Volver a la página Principal</a>
         </p>
-    {% endif %}
     </main>
   </div>
   <footer>

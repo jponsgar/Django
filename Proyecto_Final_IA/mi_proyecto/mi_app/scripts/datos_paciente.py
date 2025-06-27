@@ -38,22 +38,24 @@ svm = joblib.load('modelo_entrenado.pkl')
 def procesar_paciente(data_dict):
     nombre = data_dict['nombre']
     edad = int(data_dict['edad'])
+    fecha = data_dict('Fecha')
     genero = int(data_dict['genero'])
     creatinina = float(data_dict['creatinina'])
     tfg = int(data_dict['tfg'])
-    pas = int(data_dict['pas'])
-    pad = int(data_dict['pad'])
+    presion_arterial_sistolica = int(data_dict['presion_arterial_sistolica'])
+    presion_arterial_diastolica = int(data_dict['presion_arterial_diastolica'])
     obesidad = int(data_dict['obesidad'])
     albumina = int(data_dict['albumina'])
 
     nuevo_paciente = pd.DataFrame([{
         'nombre': nombre,
         'Edad': edad,
+        'Fecha': fecha,
         'Genero': genero,
         'Creatinina': creatinina,
         'TFG': tfg,
-        'Presion Arterial Sistolica': pas,
-        'Presion Arterial Diastolica': pad,
+        'Presion Arterial Sistolica': presion_arterial_sistolica,
+        'Presion Arterial Diastolica': presion_arterial_diastolica,
         'Obesidad': obesidad,
         'Albumina': albumina
     }])
@@ -81,7 +83,7 @@ def procesar_paciente(data_dict):
         color='Estadio ERC',
         color_continuous_scale='Bluered',
         title='Riesgo Renal por ID - Femenino=0 - Masculino=1 - Obesidad=1 - No Obesidad=0',
-        hover_data=['ID', 'Estadio ERC', 'Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad']
+        hover_data=['ID', 'Estadio ERC', 'Edad', 'Fecha', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad']
 )
 
     fig.add_trace(
@@ -90,7 +92,7 @@ def procesar_paciente(data_dict):
         x='Creatinina',
         y='TFG',
         z='Albumina',
-        hover_data=['ID', 'Prediccion Estadio ERC', 'Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad'],
+        hover_data=['ID', 'Prediccion Estadio ERC', 'Edad', 'Fecha', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad'],
         ).update_traces(marker=dict(color='yellow', size=10, symbol='diamond'), showlegend=False).data[0]
 )
 

@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
+{% block content %}
     <header>
       <h1><ins>Formulario de Datos del Paciente</ins></h1>
     </header>
@@ -19,15 +20,23 @@
       <form method="post">
          <br><br>
          {% csrf_token %}
-         <br><br>
          {{ form.as_p }}
+         {% if messages %}
+         {% for message in messages %}
          <br><br>
-         <button type="submit">Enviar</button>
+         <div><strong>{{ message }}</strong></div>
+         {% endfor %}
+         {% endif %}
+         <br><br>
+         <button class="boton" type="submit">Enviar</button>
          <br><br><br>
-         <a href="{% url 'index' %}">  Cancelar</a>
+         <p style="text-align:center;">
+         <a href="{% url 'paciente_list' %}">  Volver</a>
+         </p>
       </form>
     </main>
   </div>
+{% endblock %}
   <footer>
     <p>&copy; 2025 Hospital ERC. Todos los derechos reservados.</p>
   </footer>
