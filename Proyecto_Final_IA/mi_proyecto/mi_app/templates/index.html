@@ -59,13 +59,13 @@
         <br>
         <p>Esta web tiene como propósito realizar simulaciones del estado 
           ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.
-          Y **Regresión Lineal** (LinearRegression de scikit-learn).</p>
+           Y su tendencia con **Random Forest y Gradient Boosting**.</p>
           <br>
         <p>El **SVM** es un algoritmo de aprendizaje supervisado que clasifica 
           datos en distintas categorías. En este caso, se entrenará con historiales clínicos para predecir el estado 
           de la ERC según los parámetros de análisis de sangre.</p>
         <br>
-        <p>La **Regresión Lineal** (LinearRegression de scikit-learn) se utiliza para analizar la tendencia temporal de diferentes variables clínicas
+        <p>La **Random Forest** (RandomForestRegressor) y **Gradient Boosting** (GradientBoostingRegressor), se utilizan para analizar la tendencia temporal de diferentes variables clínicas
            de un paciente concreto. El modelo aprende la evolución de cada variable (ERC, TFG, Creatinina, Albúmina) a lo largo del tiempo,
             usando el historial de registros del paciente.</p>
          <br>

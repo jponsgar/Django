@@ -164,6 +164,30 @@ El modelo SVM predice el estadio de ERC a partir de variables clínicas, y el re
 
 ## modelo_predictivo2.py
 
+En este archivo se utilizan dos modelos de inteligencia artificial para predecir la tendencia de variables clínicas en pacientes con enfermedad renal crónica (ERC):
+
+Modelos utilizados
+Random Forest Regressor:
+Es un modelo de aprendizaje automático basado en múltiples árboles de decisión. Es robusto frente a ruido y captura relaciones no lineales en los datos.
+
+Gradient Boosting Regressor:
+Es otro modelo de árboles, pero los construye de forma secuencial, corrigiendo los errores del anterior. Suele ser más preciso en problemas complejos.
+
+Ambos modelos se entrenan con el historial de cada paciente para cada variable clínica (ERC, TFG, Creatinina, Albúmina), usando como variable independiente el tiempo (días desde la primera consulta).
+
+Resultado
+Para cada variable clínica, se genera un gráfico interactivo que muestra:
+
+Los valores reales históricos del paciente.
+La estimación de la tendencia según Random Forest y Gradient Boosting.
+Una proyección de la variable para los próximos 6 meses con ambos modelos.
+Además, se calculan métricas de rendimiento (MAE y R²) para evaluar la precisión de cada modelo sobre los datos históricos.
+
+En resumen:
+La función permite visualizar cómo han evolucionado y cómo podrían evolucionar las variables clínicas de un paciente, ayudando a anticipar riesgos y tomar decisiones clínicas informadas.
+
+## modelo_predictivo3.py
+
 Modelo de IA utilizado
 En este caso, se utiliza un modelo de Regresión Lineal (LinearRegression de scikit-learn) para analizar la tendencia temporal de diferentes variables clínicas de un paciente concreto.
 El modelo aprende la evolución de cada variable (ERC, TFG, Creatinina, Albúmina) a lo largo del tiempo, usando el historial de registros del paciente.

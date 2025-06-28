@@ -1,3 +1,5 @@
+'''Gráfico de predicción de estadio de ERC utilizando SVM y visualización con Plotly'''
+
 import pandas as pd
 import joblib
 import plotly.express as px
