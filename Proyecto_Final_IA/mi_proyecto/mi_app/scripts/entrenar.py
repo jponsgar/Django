@@ -1,40 +1,11 @@
-'''
-Método de IA utilizado
-El programa utiliza un modelo de Aprendizaje Automático llamado SVM (Máquinas de Vectores de Soporte), que es un clasificador supervisado. 
-Este modelo se entrena para predecir el estadio de Enfermedad Renal Crónica (ERC) a partir de variables clínicas de los pacientes.
-
-Cómo funciona el programa
-Carga y preparación de datos:
-Se cargan los datos sintéticos de pacientes desde un archivo CSV. Se seleccionan las variables relevantes y se convierten los datos categóricos
-(género y obesidad) a valores numéricos.
-
-División de datos:
-Los datos se dividen en conjuntos de entrenamiento y prueba para evaluar el rendimiento del modelo.
-
-Normalización:
-Se normalizan las variables numéricas usando un escalador (StandardScaler) para que todas tengan la misma escala.
-
-Entrenamiento del modelo:
-Se entrena un clasificador SVM con kernel RBF usando los datos de entrenamiento.
-
-Evaluación:
-Se hacen predicciones sobre el conjunto de prueba y se calculan métricas como la exactitud, el reporte de clasificación y la matriz de confusión, 
-que se guarda como imagen.
-
-Guardado de resultados:
-El modelo entrenado y el escalador se guardan en archivos (modelo_entrenado.pkl y escalador.pkl). También se guarda un CSV con las predicciones y
-se calcula la mediana de variables clínicas por estadio ERC.
-
-Resultado
-Modelo SVM entrenado y guardado para futuras predicciones.
-Escalador guardado para normalizar nuevos datos.
-Archivo CSV con los datos originales y las predicciones del modelo.
-Matriz de confusión guardada como imagen para analizar el rendimiento.
-Resumen estadístico (mediana) de variables clínicas por estadio ERC.
-Este modelo puede ser usado posteriormente para predecir el estadio ERC de nuevos pacientes y apoyar el diagnóstico clínico.
-'''
-
 # Entrenamiento de un modelo SVM para predecir el estadio de enfermedad renal crónica (ERC)
+# pip install --upgrade kaleido
+# pip install plotly
+# pip install joblib
+# pip install seaborn
+# pip install scikit-learn
+# pip install matplotlib
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -56,10 +27,10 @@ target = 'Estadio ERC'
 # Limpiar espacios y convertir a minúsculas para mapear correctamente y fecha en float
 data['Genero'] = data['Genero'].str.strip().str.lower().map({'masculino': 1, 'femenino': 0})
 data['Obesidad'] = data['Obesidad'].str.strip().str.lower().map({'si': 1, 'no': 0})
-data['Estadio ERC']
+data['Estadio ERC'] = pd.to_numeric(data['Estadio ERC'], errors='coerce')
 
 # Eliminar filas con NaN en la variable objetivo
-data = data.dropna(subset=['Estadio ERC'])
+data = data.dropna(subset=features)
     
 X = data[features]
 y = data[target]
@@ -119,24 +90,67 @@ data['Prediccion Estadio ERC'] = svm.predict(scaler.transform(data[features]))
 import joblib
 joblib.dump(svm, 'modelo_entrenado.pkl')
 
+# Muestreo estratificado: 50 pacientes por estadio
+data_muestreado = data.groupby('Estadio ERC', group_keys=False).apply(
+    lambda x: x.sample(n=min(len(x), 50), random_state=42)
+)
 # Guardar el modelo entrenado en csv
-data.to_csv('datos_aleatorios_resultado.csv', index=False)
+data_muestreado.to_csv('datos_aleatorios_resultado.csv', index=False)
 
 # Guardar el escalador
 joblib.dump(scaler, 'escalador.pkl')
 
-'''
-# calcular mediana por estadio ERC por 'Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad'
-mediana_por_estadio = data.groupby('Estadio ERC')[['Edad', 'Genero', 'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad']].median().reset_index()
+# Proyecto Final IA: Análisis de Datos de Enfermedad Renal Crónica (ERC)
+# Análisis de la edad promedio y proporción de género por estadio ERC
 
-# renombrar valores de las columnas 'Genero' y 'Obesidad' en el DataFrame de la mediana
-mediana_por_estadio['Genero'] = mediana_por_estadio['Genero'].apply(lambda x: 'Masculino' if x > 0.5 else 'Femenino')
-mediana_por_estadio['Obesidad'] = mediana_por_estadio['Obesidad'].apply(lambda x: 'Si' if x > 0.5 else 'No')
-mediana_por_estadio['Edad'] = mediana_por_estadio['Edad'].astype(int)
-mediana_por_estadio['Presion Arterial Sistolica'] = mediana_por_estadio['Presion Arterial Sistolica'].astype(int)
-mediana_por_estadio['Presion Arterial Diastolica'] = mediana_por_estadio['Presion Arterial Diastolica'].astype(int)
-mediana_por_estadio['Estadio ERC'] = mediana_por_estadio['Estadio ERC'].astype(int)
+# Cargar los datos procesados
+data = pd.read_csv('datos_aleatorios_resultado.csv', sep=',')
 
-# mostrar el resultado
-print("\nMediana por Estadio ERC:\n", mediana_por_estadio)
-'''
+# Asegurar tipos adecuados
+data['Genero'] = pd.to_numeric(data['Genero'], errors='coerce')
+data['Edad'] = pd.to_numeric(data['Edad'], errors='coerce')
+data['Estadio ERC'] = pd.to_numeric(data['Estadio ERC'], errors='coerce')
+
+# Agrupación por Estadio ERC
+resumen = data.groupby('Estadio ERC').agg(
+    Edad_Promedio=('Edad', 'mean'),
+    Proporcion_Masculino=('Genero', lambda x: (x == 1).mean()),
+    Total_Pacientes=('Genero', 'count')
+).reset_index()
+
+# Añadir proporción femenina
+resumen['Proporcion_Femenino'] = 1 - resumen['Proporcion_Masculino']
+
+# -------- Gráfico 1: Edad Promedio por Estadio --------
+plt.figure(figsize=(8, 5))
+plt.bar(resumen['Estadio ERC'], resumen['Edad_Promedio'], color='skyblue', edgecolor='black')
+for i, valor in enumerate(resumen['Edad_Promedio']):
+    plt.text(resumen['Estadio ERC'][i], valor + 0.5, f'{valor:.1f}', ha='center')
+plt.xlabel('Estadio ERC')
+plt.ylabel('Edad Promedio (años)')
+plt.title('Edad Promedio por Estadio ERC')
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.savefig("mi_app/static/edad_promedio_por_estadio.jpg")
+
+# -------- Gráfico 2: Proporción de Género por Estadio --------
+anchos = 0.45
+x = np.arange(len(resumen['Estadio ERC']))
+
+plt.figure(figsize=(11, 7))
+plt.bar(x - anchos/2, resumen['Proporcion_Masculino'], width=anchos, label='Masculino', color='#3366CC')
+plt.bar(x + anchos/2, resumen['Proporcion_Femenino'], width=anchos, label='Femenino', color='#FF6666')
+
+# Agregar textos sobre las barras
+for i in range(len(x)):
+    plt.text(x[i] - anchos/2, resumen['Proporcion_Masculino'][i] + 0.01, f"{resumen['Proporcion_Masculino'][i]:.0%}", ha='center')
+    plt.text(x[i] + anchos/2, resumen['Proporcion_Femenino'][i] + 0.01, f"{resumen['Proporcion_Femenino'][i]:.0%}", ha='center')
+
+plt.xticks(x, resumen['Estadio ERC'].astype(str).tolist())
+plt.xlabel('Estadio ERC')
+plt.ylabel('Proporción')
+plt.title('Proporción Masculina vs Femenina por Estadio ERC')
+plt.legend(loc='upper right')
+plt.grid(axis='y', linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.savefig("mi_app/static/proporcion_genero_por_estadio.jpg")

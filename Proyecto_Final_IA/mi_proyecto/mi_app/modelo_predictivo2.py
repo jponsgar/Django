@@ -1,4 +1,9 @@
 '''Random Forest y Gradient Boosting para la predicción de tendencias clínicas de pacientes con ERC'''
+#pip install plotly
+#pip install joblib
+#pip install seaborn
+#pip install scikit-learn
+#pip install matplotlib
 
 import plotly.graph_objs as go
 import plotly.offline as pyo

@@ -1,31 +1,9 @@
-'''
-Método de IA utilizado
-El programa utiliza un modelo de Aprendizaje Automático (IA), concretamente un clasificador SVM (Máquinas de Vectores de Soporte),
-previamente entrenado y guardado en el archivo modelo_entrenado.pkl. Además, emplea un escalador de características (escalador.pkl)
-para normalizar los datos antes de hacer la predicción.
-
-Cómo funciona el programa
-Carga de modelos:
-Se cargan el modelo SVM y el escalador desde archivos previamente entrenados.
-
-Procesamiento de datos del paciente:
-Se recibe un diccionario con los datos clínicos de un paciente (edad, género, creatinina, TFG, presión arterial, obesidad, albúmina, etc.).
-
-Normalización:
-Los datos del paciente se transforman usando el escalador para que tengan la misma escala que los datos usados en el entrenamiento del modelo.
-
-Predicción:
-El modelo SVM predice el estadio de Enfermedad Renal Crónica (ERC) del paciente a partir de sus datos clínicos.
-
-Visualización:
-Se genera un gráfico 3D interactivo con Plotly, mostrando la posición del paciente respecto a otros datos y su estadio ERC predicho.
-
-El Resultado es:
-
-La Predicción automática del estadio ERC para el paciente introducido, usando IA.
-Visualización interactiva en 3D de los datos clínicos y el estadio predicho.
-El estadio predicho y el gráfico pueden ser usados para apoyar el diagnóstico y seguimiento clínico.
-'''
+#pip install --upgrade kaleido
+#pip install plotly
+#pip install joblib
+#pip install seaborn
+#pip install scikit-learn
+#pip install matplotlib
 
 import pandas as pd
 import joblib

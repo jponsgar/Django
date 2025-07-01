@@ -1,4 +1,10 @@
 '''Gráfico de predicción de estadio de ERC utilizando SVM y visualización con Plotly'''
+#pip install --upgrade kaleido
+#pip install plotly
+#pip install joblib
+#pip install seaborn
+#pip install scikit-learn
+#pip install matplotlib
 
 import pandas as pd
 import joblib
