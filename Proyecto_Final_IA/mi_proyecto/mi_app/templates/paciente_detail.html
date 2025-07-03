@@ -15,6 +15,7 @@
     </header>
       <div class="container2">
     <nav class="sidebar2">
+      <a class="boton" href="{% url 'paciente_list' %}">Volver</a>
     </nav>
      <main class="contenido">
       <form method="post">
@@ -39,10 +40,6 @@
     <br><br><br><br>
     <a class="boton" href="{% url 'grafico_renal' object.id %}">Predecir Estadio</a> | 
     <a class="boton" href="{% url 'grafico_tendencia' object.id %}">  Gráfico de Tendencia</a>
-    <br><br><br><br>
-    <p style="text-align:center;">
-    <a href="{% url 'paciente_list' %}">Volver </a>
-    </p>
 {% endblock %}
       </form>
     </main>

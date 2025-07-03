@@ -14,6 +14,7 @@
     </header>
   <div class="container2">
     <nav class="sidebar2">
+      <a class="boton" href="{% url 'index' %}">  Volver</a>
     </nav>
      <main class="contenido">
       <form method="post">
@@ -26,11 +27,7 @@
         <h2 style="text-align:center;">Resumen de los Datos</h2>
         <br>
         <pre style="text-align:center;">{{ resultado }}</pre>
-        <br><br><br><br><br><br><br><br>
     {% endif %}
-        <p style="text-align:center;">
-        <a href="{% url 'index' %}">  Volver a la página Principal</a>
-        </p>
     </main>
   </div>
   <footer>

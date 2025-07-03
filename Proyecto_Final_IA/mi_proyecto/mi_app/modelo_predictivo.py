@@ -66,7 +66,20 @@ def construir_grafico_desde_bd(paciente_id=None):
     if 'ID' not in data.columns:
         data['ID'] = data.index
 
-    data = pd.concat([data, df], ignore_index=True)
+    data = pd.concat([data, df], ignore_index=bool(paciente_id))
+
+    # renombrar Genero 1 = 'Masculino', 0 = 'Femenino'
+    data['Genero'] = data['Genero'].map({1: 'Masculino', 0: 'Femenino'})
+    if df['Genero'].iloc[-1] == '1':
+        df['Genero'] = 'Masculino'
+    else:
+        df['Genero'] = 'Femenino'
+    # renombrar Obesidad 1 = 'Si', 0 = 'No'
+    data['Obesidad'] = data['Obesidad'].map({1: 'Si', 0: 'No'})
+    if df['Obesidad'].iloc[-1] == '1':
+        df['Obesidad'] = 'Si'
+    else:
+        df['Obesidad'] = 'No'
 
     fig = px.scatter_3d(
         data,
@@ -75,7 +88,6 @@ def construir_grafico_desde_bd(paciente_id=None):
         z='Albumina',
         color='Estadio ERC',
         color_continuous_scale='Bluered',
-        title='Riesgo Renal por ID - Femenino=0 - Masculino=1 - Obesidad=1 - No Obesidad=0',
         hover_data=['ID', 'Estadio ERC', 'Edad', 'Fecha', 'Genero',
                     'Presion Arterial Sistolica', 'Presion Arterial Diastolica', 'Obesidad']
     )

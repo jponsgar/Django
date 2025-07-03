@@ -14,25 +14,33 @@
     </header>
   <div class="container2">
     <nav class="sidebar2">
+      <a class="boton" href="{% url 'index' %}">  Volver</a>
     </nav>
      <main class="contenido">
       <form method="post">
   {% block content %}
       <br>
-      <ul>
-        {% for paciente in object_list %}
-            <li><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a>  |  {{ paciente.fecha }}</li>
-        {% empty %}
-            <li>No hay pacientes registrados.</li>
-        {% endfor %}
-      </ul>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Fecha Analítica</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paciente in object_list %}
+    <tr>
+      <td><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a></td>
+      <td>{{ paciente.fecha }}</td>
+    {% empty %}
+      <td>No hay pacientes registrados.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
       <br><br>
       <a class="boton" href="{% url 'datos_paciente' %}">Añadir Paciente</a>
   {% endblock %}
-        <br><br><br><br>
-        <p style="text-align:center;">
-        <a href="{% url 'index' %}">  Volver a la página Principal</a>
-        </p>
       </form>
     </main>
   </div>

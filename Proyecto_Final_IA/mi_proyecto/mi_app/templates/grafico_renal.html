@@ -10,17 +10,15 @@
 </head>
 <body>
     <header>
-    <h1><ins>Visualización del Estadio Renal Crónico</ins></h1>
+     <h1><ins>Visualización del Estadio Renal Crónico</ins></h1>
     </header>
-      <div class="container2">
-    <nav class="sidebar2">
-    </nav>
+      <div>
+        <nav class="sidebar2">
+          <button class="boton" onclick="history.back();">VOLVER</button>
+        </nav>
+        <p style="text-decoration: underline; text-align: center;">Estadio ERC Predicho para el Paciente "{{ nombre }}" en amarillo: <strong>{{ estadio }}</strong></p>
     <main class="contenido">
-    <p style="text-decoration: underline;">Estadio ERC Predicho para el Paciente "{{ nombre }}" en amarillo: <strong>{{ estadio }}</strong></p>
-    {{ grafico|safe }}
-    <p style="text-align:center;">
-    <button class="boton" onclick="history.back();">VOLVER</button>
-    </p>
+        {{ grafico|safe }}
     </main>
   </div>
   <footer>

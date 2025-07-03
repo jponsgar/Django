@@ -15,6 +15,7 @@
     </header>
   <div class="container2">
     <nav class="sidebar2">
+      <a class="boton" href="{% url 'paciente_list' %}">  Volver</a>
     </nav>
      <main class="contenido">
       <form method="post">
@@ -29,10 +30,6 @@
          {% endif %}
          <br><br>
          <button class="boton" type="submit">Enviar</button>
-         <br><br><br>
-         <p style="text-align:center;">
-         <a href="{% url 'paciente_list' %}">  Volver</a>
-         </p>
       </form>
     </main>
   </div>

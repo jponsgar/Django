@@ -104,6 +104,7 @@ def index(request):
 class PacienteListView(ListView):
     model = Paciente
     template_name = 'paciente_list.html'
+    ordering = ['nombre', 'fecha']
 
 class PacienteDetailView(DetailView):
     model = Paciente
