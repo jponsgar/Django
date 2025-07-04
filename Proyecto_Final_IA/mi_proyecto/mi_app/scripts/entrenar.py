@@ -90,9 +90,9 @@ data['Prediccion Estadio ERC'] = svm.predict(scaler.transform(data[features]))
 import joblib
 joblib.dump(svm, 'modelo_entrenado.pkl')
 
-# Muestreo estratificado: 50 pacientes por estadio
+# Muestreo estratificado: 20 pacientes por estadio
 data_muestreado = data.groupby('Estadio ERC', group_keys=False).apply(
-    lambda x: x.sample(n=min(len(x), 50), random_state=42)
+    lambda x: x.sample(n=min(len(x), 20), random_state=42)
 )
 # Guardar el modelo entrenado en csv
 data_muestreado.to_csv('datos_aleatorios_resultado.csv', index=False)

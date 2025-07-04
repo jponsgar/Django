@@ -66,7 +66,9 @@ def construir_grafico_desde_bd(paciente_id=None):
     if 'ID' not in data.columns:
         data['ID'] = data.index
 
-    data = pd.concat([data, df], ignore_index=bool(paciente_id))
+    data = pd.concat([data, df], ignore_index=True)
+
+    assert all(feature in df.columns for feature in features)
 
     # renombrar Genero 1 = 'Masculino', 0 = 'Femenino'
     data['Genero'] = data['Genero'].map({1: 'Masculino', 0: 'Femenino'})
@@ -106,5 +108,8 @@ def construir_grafico_desde_bd(paciente_id=None):
     buffer = io.StringIO()
     fig.write_html(buffer, include_plotlyjs='cdn')
     html_graph = buffer.getvalue()
+
+    # Guardar directamente en un archivo HTML
+    fig.write_html('mi_app/templates/grafico_paciente_erc.html', include_plotlyjs='cdn')
 
     return html_graph, nombre_paciente, estadio_predicho
