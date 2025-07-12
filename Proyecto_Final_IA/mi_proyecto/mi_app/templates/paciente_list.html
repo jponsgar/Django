@@ -25,6 +25,7 @@
     <tr>
       <th>Nombre</th>
       <th>Fecha Analítica</th>
+      <th>ERC</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +33,7 @@
     <tr>
       <td><a href="{% url 'paciente_detail' paciente.id %}">{{ paciente.nombre }}</a></td>
       <td>{{ paciente.fecha }}</td>
+      <td>{{ paciente.erc }}</td>
     {% empty %}
       <td>No hay pacientes registrados.</td>
     </tr>

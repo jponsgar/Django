@@ -10,24 +10,6 @@ from django.contrib import messages
 from .modelo_predictivo import construir_grafico_desde_bd
 from .modelo_predictivo2 import construir_tendencia_paciente
 
-@csrf_protect
-def entrenar_view(request):
-    resultado = ""
-    if request.method == "POST":
-        try:
-            # Ejecutar el script Python
-            proceso = subprocess.run(
-                ['python3', 'mi_app/scripts/entrenar.py'],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            resultado = proceso.stdout if proceso.returncode == 0 else proceso.stderr
-        except Exception as e:
-            resultado = f"Error al ejecutar el script: {e}"
-
-    return render(request, 'entrenar.html', {'resultado': resultado})
-
 @csrf_protect 
 def crear_datos_view(request):
     resultado = ""
@@ -57,7 +39,8 @@ def datos_paciente_view(request):
         if form.is_valid():
             paciente = Paciente.objects.create(**form.cleaned_data)
             messages.success(request, f'Paciente "{paciente.nombre}" creado con éxito.')
-            return redirect('paciente_list')  # Cambia esta línea si quieres redirigir a otra vista
+            return redirect('paciente_detail', pk=paciente.pk)  # Cambia esta línea si quieres redirigir a otra vista
+            
         else:
             messages.error(request, 'Por favor corrige los errores del formulario.')
     else:
@@ -114,7 +97,7 @@ class PacienteCreateView(CreateView):
     model = Paciente
     form_class = PacienteForm
     template_name = 'datos_paciente.html'
-    success_url = reverse_lazy('paciente_list')
+    reverse_lazy('paciente_detail')
 
 class PacienteUpdateView(UpdateView):
     model = Paciente

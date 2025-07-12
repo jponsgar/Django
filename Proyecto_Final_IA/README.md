@@ -26,11 +26,7 @@ python -m django startapp mi_app
 
 ## `crear_datos.html`
 
-## `entrenar.html`
-
 ## `datos_paciente.html`
-
-## `entrenar_resultados.html`
 
 ## `grafico_renal.html`
 
@@ -44,127 +40,117 @@ python -m django startapp mi_app
 
 ## `paciente_list`
 
-## `resultado_paciente.html`
-
 ### 8. Pythons, en `mi_app/scripts/`
 
 ## crear_datos.py
 
-Este script en Python genera un conjunto de datos clínicos sintéticos y los guarda en un archivo CSV para su uso en modelos de inteligencia artificial.
+El código utiliza un enfoque completo de machine learning para analizar y predecir el estadio de la Enfermedad Renal Crónica (ERC) en pacientes simulados.
 
-¿Qué hace el código?
-Generación de datos aleatorios realistas:
+Método IA utilizado
+Generación de datos sintéticos:
+Se crean 15,000 registros de pacientes con variables clínicas realistas (edad, género, creatinina, TFG, presión arterial, albúmina, obesidad, estadio ERC).
 
-Crea registros de pacientes con variables como edad, fecha, género, obesidad, creatinina, TFG, albúmina, presión arterial y estadio de ERC.
-Los valores se generan usando distribuciones estadísticas y reglas clínicas (por ejemplo, la creatinina y el TFG se ajustan según la edad, género y obesidad).
-Clasificación del estadio ERC:
+Preprocesamiento:
+Las variables categóricas (género, obesidad) se convierten a valores numéricos.
+Se eliminan registros incompletos.
 
-El estadio de la enfermedad renal crónica se determina automáticamente a partir del valor de TFG, siguiendo criterios médicos estándar.
-Guardado en CSV:
-
-Los datos generados se guardan en un archivo llamado datos_aleatorios.csv con los nombres de las columnas apropiados.
-Visualización rápida:
-
-Muestra por pantalla las primeras filas del DataFrame generado para verificar el resultado.
-Resultado
-Se crea un archivo datos_aleatorios.csv con 15,000 registros de pacientes simulados, cada uno con variables clínicas relevantes y el estadio de ERC calculado.
-Se imprime en consola una muestra de los primeros registros para comprobar la estructura y el contenido de los datos.
-En resumen:
-El script automatiza la creación de un dataset clínico sintético, útil para entrenar y probar modelos de IA en el ámbito de la nefrología, sin necesidad de datos reales de pacientes.
-
-## entrenar.py
-
-Este script en Python entrena y evalúa un modelo de Máquinas de Vectores de Soporte (SVM) para predecir el estadio de la Enfermedad Renal Crónica (ERC) a partir de datos clínicos de pacientes.
-
-¿Qué hace el código?
-Carga y prepara los datos:
-
-Lee un archivo CSV con datos de pacientes.
-Convierte variables categóricas (género, obesidad) a valores numéricos.
-Elimina filas con datos faltantes.
 Entrenamiento del modelo:
+Se utiliza un Random Forest Classifier (un modelo de árboles de decisión en conjunto) para predecir el estadio ERC a partir de las variables clínicas.
+Los datos se dividen en entrenamiento y prueba, y se escalan para mejorar el rendimiento del modelo.
 
-Divide los datos en conjuntos de entrenamiento y prueba.
-Escala las variables numéricas.
-Entrena un modelo SVM para clasificar el estadio ERC.
 Evaluación:
+Se calcula la exactitud, matriz de confusión, reporte de clasificación y métricas de falsos/verdaderos positivos y negativos.
 
-Realiza predicciones sobre los datos de prueba.
-Calcula métricas como exactitud, matriz de confusión, falsos positivos/negativos y muestra un reporte de clasificación.
-Guarda la matriz de confusión como imagen.
-Exporta resultados y modelos:
+Exportación:
+El modelo y el escalador se guardan para su uso posterior.
+Se genera un muestreo estratificado de pacientes por estadio y se guarda en un nuevo CSV.
 
-Guarda el modelo entrenado y el escalador para su uso posterior.
-Realiza un muestreo estratificado y guarda un nuevo CSV con los datos y las predicciones.
 Análisis y visualización:
+Se calcula la edad promedio y la proporción de género por estadio ERC.
+Se generan gráficos de edad promedio y proporción de género por estadio.
 
-Calcula la edad promedio y la proporción de género por estadio ERC.
-Genera y guarda gráficos de edad promedio y proporción de género por estadio.
 Resultado
-Un modelo SVM entrenado y guardado para predecir el estadio ERC.
+Un modelo de IA entrenado capaz de predecir el estadio ERC de nuevos pacientes a partir de sus datos clínicos.
 Imágenes de la matriz de confusión, edad promedio por estadio y proporción de género por estadio.
-Un archivo CSV con los datos procesados y las predicciones.
-Métricas impresas en consola que permiten evaluar el rendimiento del modelo.
+Archivos CSV con los datos simulados y las predicciones.
+Métricas impresas en consola para evaluar el rendimiento del modelo.
 En resumen:
-El script automatiza el entrenamiento, evaluación y análisis de un modelo de IA para predecir el estadio de ERC, generando resultados visuales y archivos útiles para su integración en una aplicación clínica.
+El método permite simular, analizar y predecir el estadio de ERC usando IA, y visualizar los resultados de forma clara y útil para aplicaciones clínicas.
 
 ### 9. Pythons, en `mi_app`
 
 ## modelo_predictivo.py
 
-Este código en Python utiliza técnicas de machine learning y visualización para predecir y mostrar el estadio de la Enfermedad Renal Crónica (ERC) de pacientes.
+El método de IA utilizado en este código es una Máquina de Vectores de Soporte (SVM) para la predicción del estadio de la Enfermedad Renal Crónica (ERC) de pacientes.
 
-¿Qué hace el código?
-Carga modelos entrenados:
-Utiliza joblib para cargar un escalador (scaler.pkl) y un modelo SVM (modelo_entrenado.pkl) previamente entrenados.
+¿Cómo funciona el método?
+Carga de modelos entrenados:
+Se cargan un escalador (scaler.pkl) y un modelo SVM (modelo_entrenado.pkl) previamente entrenados con datos clínicos.
 
-Obtiene datos del paciente:
-Recupera los registros de pacientes desde la base de datos y los convierte en un DataFrame de pandas.
+Obtención y preprocesamiento de datos:
+Se extraen los datos del paciente desde la base de datos y se preparan las variables relevantes (edad, género, creatinina, TFG, presión arterial, obesidad, albúmina).
 
-Preprocesa los datos:
-Renombra columnas y selecciona las variables clínicas relevantes.
+Predicción:
+Los datos se escalan y se pasan al modelo SVM, que predice el estadio ERC para cada paciente.
 
-Predice el estadio ERC:
-Escala los datos y usa el modelo SVM para predecir el estadio de ERC de cada paciente. Si se predice para un paciente concreto, actualiza ese valor en la base de datos.
+Actualización en la base de datos:
+Si se trata de un paciente concreto, el estadio predicho se guarda en la base de datos.
 
-Prepara los datos para visualización:
-Lee un archivo CSV con datos históricos y concatena el nuevo registro.
-
-Visualiza en 3D:
-Utiliza Plotly para crear un gráfico 3D interactivo donde:
+Visualización:
+Se genera un gráfico 3D interactivo con Plotly, donde:
 
 Cada punto representa un paciente.
-El color indica el estadio de ERC.
-El último paciente analizado se resalta en amarillo.
-Devuelve el resultado:
-Retorna el HTML del gráfico, el nombre del paciente y el estadio predicho.
+El color indica el estadio ERC.
+El paciente analizado se resalta en amarillo.
+Resultado devuelto:
+Se retorna el HTML del gráfico, el nombre del paciente y el estadio predicho.
 
 Resultado
-El resultado es un gráfico 3D interactivo que permite visualizar la posición clínica del paciente respecto a otros, junto con el estadio de ERC predicho por el modelo de IA.
-Esto ayuda a médicos y pacientes a entender el riesgo y la situación clínica de manera visual y sencilla.
+Predicción personalizada: El modelo SVM estima el estadio ERC del paciente analizado.
+Visualización clínica: El gráfico 3D permite comparar la situación del paciente con otros casos.
+Actualización automática: El estadio predicho se guarda en la base de datos para futuras consultas.
+En resumen:
+El método permite predecir el estadio ERC de un paciente usando IA y visualizar su situación clínica de forma interactiva y comparativa.
 
 ## modelo_predictivo2.py
 
-El código en tu archivo utiliza Python para analizar y predecir la evolución de variables clínicas de pacientes con enfermedad renal crónica (ERC) usando técnicas de inteligencia artificial.
+El método de IA utilizado en este código es la predicción de tendencias clínicas mediante dos modelos de regresión:
 
-¿Qué hace el código?
-Obtiene el historial clínico de un paciente desde la base de datos, ordenado por fecha.
-Selecciona variables clínicas importantes: ERC, TFG, Creatinina y Albúmina.
-Entrena dos modelos de IA para cada variable:
 Random Forest Regressor
 Gradient Boosting Regressor
-Evalúa el rendimiento de cada modelo usando métricas como MAE (error absoluto medio) y R² (coeficiente de determinación).
-Proyecta la evolución futura de cada variable para los próximos 6 meses.
-Genera gráficos interactivos con Plotly que muestran:
-Los valores reales históricos.
-Las predicciones de ambos modelos.
-Las proyecciones a futuro.
-Resultado
-El resultado es un conjunto de gráficos interactivos (uno por variable clínica) que permiten visualizar:
+¿Cómo funciona el método?
+Obtención de historial clínico:
+Se extraen los registros históricos de un paciente (por nombre) desde la base de datos.
 
-Cómo han evolucionado las variables clínicas del paciente.
-Qué tendencia predicen los modelos de IA para los próximos meses.
-Esto ayuda a médicos y pacientes a anticipar posibles cambios en la salud renal y tomar decisiones informadas.
+Selección de variables:
+Se analizan las variables ERC, TFG, Creatinina y Albúmina a lo largo del tiempo.
+
+Entrenamiento de modelos:
+Para cada variable, se entrena un modelo Random Forest y uno Gradient Boosting usando los días transcurridos como variable independiente y los valores clínicos como variable dependiente.
+
+Evaluación:
+Se calculan métricas de rendimiento (MAE y R²) para cada modelo y variable.
+
+Proyección futura:
+Los modelos predicen la evolución de cada variable para los próximos 6 meses.
+
+Visualización:
+Se generan gráficos interactivos con Plotly que muestran:
+
+Valores reales históricos.
+Predicciones de ambos modelos.
+Proyección a futuro.
+Rangos clínicos normales y alertas si hay valores fuera de rango.
+Gráfico combinado:
+Se crea un gráfico adicional que muestra la evolución conjunta de TFG, Creatinina y Albúmina.
+
+Resultado
+Gráficos interactivos que permiten visualizar la evolución histórica y futura de las variables clínicas del paciente.
+Alertas automáticas si algún valor está fuera del rango clínico recomendado.
+Comparación visual entre la tendencia real y la estimada por los modelos de IA.
+Herramienta de apoyo para el seguimiento y la toma de decisiones clínicas personalizadas.
+En resumen:
+El método permite anticipar la evolución clínica de un paciente con ERC usando IA y visualizar los resultados de forma clara y útil para médicos y pacientes.
 
 ### 10. Migrar los cambios a la base de datos desde la ruta `/mi_proyecto`
 
@@ -175,4 +161,4 @@ bash: python manage.py makemigrations / python manage.py migrate
 bash: cd Proyecto_Final_IA / cd mi_proyecto
 bash: python runserver_open.py ó python manage.py runserver
 
-Se lanza la siguiente url: http://127.0.0.1:8000/
+Se lanza la siguiente url: [http://127.0.0.1:8000/]

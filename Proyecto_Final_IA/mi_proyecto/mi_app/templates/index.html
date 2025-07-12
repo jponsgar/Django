@@ -16,9 +16,7 @@
     <nav class="sidebar">
       <ul>
           <br>
-          <li><a href="{% url 'crear_datos' %}">1. Crear: Dataframe_Simulado "Estadio ERC"</a></li>
-          <br>
-          <li><a href="{% url 'entrenar' %}">2. Entrenar: Datos_Simulados "Estadio ERC"</a></li>
+          <li><a href="{% url 'crear_datos' %}">1. Crear y Entrenar: Dataframe_Simulado "Estadio ERC"</a></li>
           <br>
           <li><a href="{% url 'paciente_list' %}">3. Lista Pacientes</a></li>
           <br>
@@ -58,14 +56,13 @@
         <h2>Simulación del Estado ERC con Inteligencia Artificial</h2>
         <br>
         <p>Esta web tiene como propósito realizar simulaciones del estado 
-          ERC de un paciente utilizando un modelo de Aprendizaje Automático: el **Support Vector Machine (SVM)**.
-           Y su tendencia con **Random Forest y Gradient Boosting**.</p>
+          ERC de un paciente utilizando modelos de Aprendizaje Automático: **Random Forest** y **Gradient Boosting**.</p>
           <br>
-        <p>El **SVM** es un algoritmo de aprendizaje supervisado que clasifica 
-          datos en distintas categorías. En este caso, se entrenará con historiales clínicos para predecir el estado 
+        <p> **Random Forest Classifier** (un modelo de árboles de decisión en conjunto) para predecir el estadio ERC a partir de las variables clínicas. 
+          En este caso, se entrenará con historiales clínicos para predecir el estado 
           de la ERC según los parámetros de análisis de sangre.</p>
         <br>
-        <p>La **Random Forest** (RandomForestRegressor) y **Gradient Boosting** (GradientBoostingRegressor), se utilizan para analizar la tendencia temporal de diferentes variables clínicas
+        <p> **Random Forest** (RandomForestRegressor) y **Gradient Boosting** (GradientBoostingRegressor), se utilizan para analizar la tendencia temporal de diferentes variables clínicas
            de un paciente concreto. El modelo aprende la evolución de cada variable (ERC, TFG, Creatinina, Albúmina) a lo largo del tiempo,
             usando el historial de registros del paciente.</p>
          <br>
@@ -78,6 +75,8 @@
             <li><strong>Chatbot - Kidney GPT: AI Nephrology Expert System.</strong></li>
         </ul>
         <br>
+        <p style="color:red;"> Advertencia: Los modelos de aprendizaje automático son herramientas poderosas, pero sus predicciones
+           deben ser interpretadas con cautela y siempre en el contexto clínico adecuado, y bajo supervisión médica.</p>
     </main>
   </div>
   <footer>
